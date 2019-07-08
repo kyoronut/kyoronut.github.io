@@ -11,8 +11,6 @@ $(function(){
 	$('#btn1').click(function(){
 		var dt = {a:1, b:2};
 		$.ajax({
-			<!-- url:"https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
-			-->
 			url:"https://api.dex.ag/price?from=ETH&to=DAI&fromAmount=1&dex=uniswap",
 			type:"GET",
 			dataType:"json",
@@ -24,6 +22,18 @@ $(function(){
 		})
 		.done((data)=>{console.log(data);
 				$('body').append(data.price);
+		     })
+		.fail((data)=>{console.log(data.responceText);})
+		.always((data)=>{console.log(data);});
+		
+		$.ajax({
+			url:"https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14"
+			dataType:"json",
+			data:dt})
+		
+			.done((data)=>{console.log(data);
+
+				       $('body').append(data.result);
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
