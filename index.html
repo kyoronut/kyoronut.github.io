@@ -59,7 +59,7 @@ $(function(){
 		.always((data)=>{console.log(data);});
 			       if(eth_liq > 0 && supply > 0){
 				       price_internal = eth_liq * 2 / supply;
-				       $('body').append("ineternal price: " + price_internal + " ETH   ");
+				       $('body').append("ineternal_price: " + price_internal.toFixed(3) + " ETH,   ");
 			       }
 			       
 		$.ajax({
@@ -91,7 +91,7 @@ $(function(){
 		.always((data)=>{console.log(data);});
 			       if(eth_liq_uni > 0 && uni_liq_uni > 0){
 				       price_market = eth_liq_uni / uni_liq_uni;
-				       $('body').append("market price: " + price_market + " ETH   ")
+				       $('body').append("market_price: " + price_market.toFixed(3) + " ETH   ")
 			       }
 	});
 });
