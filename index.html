@@ -29,8 +29,8 @@ $(function(){
 		
 			.done((data)=>{console.log(data);
 
-				       <!--$('body').append(data.result);-->
-					       document.write(data.result);
+				       var supply = data.result * 1e-18;
+				       $('body').append(supply + "\n");
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
