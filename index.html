@@ -15,14 +15,9 @@ $(function(){
 			type:"GET",
 			dataType:"json",
 			data:dt,
-			xhrFields: {
-				         withCredentials: false,
-					         'X-Requested-With' : 'XMLHttpRequest'
-						                 },
 		})
 		.done((data)=>{console.log(data);
-				<!--$('body').append(data.price);-->
-					document.write(data.price);
+				$('body').append(data.price + "DAI/ETH \n");
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
