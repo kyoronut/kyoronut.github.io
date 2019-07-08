@@ -57,9 +57,9 @@ $(function(){
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
-			       price_internal = eth_liq * 2 / supply;
-			       if(price_internal != "NaN"){
-				       $('body').append("ineternal price: " + price_internal + " ETH");
+			       if(eth_liq > 0 && supply > 0){
+				       price_internal = eth_liq * 2 / supply;
+				       $('body').append("ineternal price: " + price_internal + " ETH   ");
 			       }
 			       
 		$.ajax({
@@ -89,9 +89,9 @@ $(function(){
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
-			       price_market = eth_liq_uni / uni_liq_uni;
-			       if(price_market != "NaN"){
-				       $('body').append("market price: " + price_market + " ETH")
+			       if(eth_liq_uni > 0 && uni_liq_uni > 0){
+				       price_market = eth_liq_uni / uni_liq_uni;
+				       $('body').append("market price: " + price_market + " ETH   ")
 			       }
 	});
 });
