@@ -11,18 +11,12 @@ $(function() {
     console.log(send_data);
     //  use webapi
     $.ajax({
+      type: "get"
       url: 'https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359',
       dataType: "json",
-      data: "price_last",
       //  when success
       success: function(responce) {
-        if (responce.result === "OK") {
-          console.log(responce);
-          $('div[data-result=""]').html(JSON.stringify(responce));
-        } else {
-          console.log(responce);
-          $('div[data-result=""]').html(JSON.stringify(responce));
-        }
+        document.write(responce.last_price);
         return false;
       },
       //  when fail
