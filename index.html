@@ -11,7 +11,9 @@ $(function(){
 	$('#btn1').click(function(){
 		var dt = {a:1, b:2};
 		$.ajax({
-			url:"https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
+			<!-- url:"https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
+			-->
+			url:"https://api.dex.ag/price?from=ETH&to=DAI&fromAmount=1&dex=uniswap",
 			type:"GET",
 			dataType:"json",
 			data:dt,
@@ -21,7 +23,7 @@ $(function(){
 						                 },
 		})
 		.done((data)=>{console.log(data);
-				$('body').append(data.price_last);
+				$('body').append(data.price);
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
