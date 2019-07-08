@@ -7,10 +7,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.uniswap.info');
-xhr.addEventListener('load', onLoadFunc, false);
-xhr.send(null);
 $(function(){
 	$('#btn1').click(function(){
 		var dt = {a:1, b:2};
@@ -18,7 +14,11 @@ $(function(){
 			url:"https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
 			type:"GET",
 			dataType:"json",
-			data:dt
+			data:dt,
+			xhrFields: {
+				         withCredentials: false,
+					         'X-Requested-With' : 'XMLHttpRequest'
+						                 },
 		})
 		.done((data)=>{console.log(data);
 				$('body').append(data.price_last);
