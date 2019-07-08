@@ -1,9 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>kyoronut's page</title>
-</head>
+  <meta charset = "UTF-8">
+  <title>kyoronut's page</title>
+  <style type = "text/css">
+    body,
+    input,
+    button{
+      font-size: 30px;
+    }
+    </style>
+  </head>
 <body>
-<h1>kyoronut's page</h1>
-<p>hello</p>
+  <h1>kyoronut's page</h1>
+  <p>hello</p>
+  <!-- Text box -->
+  User Type: <input type = "text" name = "dataType" /><br>
+  <!-- Input list-->
+  <ul> 
+    <li> a:amount </li>
+  </ul>
+  <!-- button -->
+  <button data-btn-type = "ajax"> Data get! </button>
+  <br><br>
+  <!--tag for result-->
+  <div data-result=""> failed </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="api.js"></script>
+  <!-- <script type="text/javascript" src="api2.js"></script> -->
 </body>
 </html>
