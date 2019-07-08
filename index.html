@@ -34,7 +34,8 @@ $(function(){
 		
 			.done((data)=>{console.log(data);
 
-				       $('body').append(data.result);
+				       <!--$('body').append(data.result);-->
+					       document.write(data.result);
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
