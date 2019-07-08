@@ -13,7 +13,7 @@ $(function() {
     $.ajax({
       url: 'https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359',
       dataType: "json",
-      data: "",
+      data: "price_last",
       //  when success
       success: function(responce) {
         if (responce.result === "OK") {
