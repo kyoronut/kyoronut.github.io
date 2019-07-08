@@ -10,6 +10,8 @@
 $(function(){
 	var supply;
 	var eth_liq;
+	var eth_liq_uni;
+	var uni_liq_uni;
 	var price_internal;
 	var price_market;
 	$('#btn1').click(function(){
@@ -56,7 +58,41 @@ $(function(){
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
 			       price_internal = eth_liq * 2 / supply;
-			       $('body').append("ineternal price" + price_internal + " ETH");
+			       if(price_internal != "NaN"){
+				       $('body').append("ineternal price: " + price_internal + " ETH");
+			       }
+			       
+		$.ajax({
+			url:"https://api.etherscan.io/api?module=account&action=balance&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest",
+			dataType:"json",
+			data:dt})
+		
+			.done((data)=>{console.log(data);
+
+				       eth_liq_uni = data.result * 1e-18;
+				      
+				     
+		     })
+		.fail((data)=>{console.log(data.responceText);})
+		.always((data)=>{console.log(data);});
+			       
+		$.ajax({
+			url:"https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest",
+			dataType:"json",
+			data:dt})
+		
+			.done((data)=>{console.log(data);
+
+				       uni_liq_uni = data.result * 1e-18;
+				      
+				     
+		     })
+		.fail((data)=>{console.log(data.responceText);})
+		.always((data)=>{console.log(data);});
+			       price_market = eth_liq_uni / uni_liq_uni;
+			       if(price_market != "NaN"){
+				       $('body').append("market price: " + price_market + " ETH")
+			       }
 	});
 });
 </script>
