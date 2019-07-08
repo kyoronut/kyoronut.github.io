@@ -17,7 +17,9 @@ $(function(){
 			data:dt,
 		})
 		.done((data)=>{console.log(data);
-				$('body').append(data.price + "DAI/ETH \n");
+			       <br>
+				$('body').append(data.price + "DAI/ETH");
+			       <br>
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
@@ -30,7 +32,9 @@ $(function(){
 			.done((data)=>{console.log(data);
 
 				       var supply = data.result * 1e-18;
+				       <br>
 				       $('body').append(supply + "\n");
+				       <br>
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
