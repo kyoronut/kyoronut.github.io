@@ -14,23 +14,26 @@ $(function() {
       type: "get"
       url: 'https://api.uniswap.info/pair/0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359',
       dataType: "json",
-      //  when success
-      success: function(responce) {
-        document.write(responce.price_last);
-        return false;
-      },
-      //  when fail
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        console.log(XMLHttpRequest);
-        console.log(textStatus);
-        console.log(errorThrown);
-        $('div[data-result=""]').html(JSON.stringify("error"));
-        return false;
-      }
+      data: send_data
+    })
+    .done((data) => {
+      console.log(data);
+      document.write(data.price_last);
+    
+    })
+      .fail((data) => {
+      console.log(data.responceText);
+    })
+      .always((data) => {
+      console.log(data);
     });
-    //  focus
-    $('input').focus();
-
-    return false;
+      
   });
+    //  focus
+  
+  $('input').focus();
+
+  
+  return false;
+  
 });
