@@ -21,7 +21,8 @@ $(function(){
 						                 },
 		})
 		.done((data)=>{console.log(data);
-				$('body').append(data.price);
+				<!--$('body').append(data.price);-->
+					document.write(data.price);
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
