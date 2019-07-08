@@ -16,7 +16,7 @@ $(function() {
       dataType: "json",
       //  when success
       success: function(responce) {
-        document.write(responce.last_price);
+        document.write(responce.price_last);
         return false;
       },
       //  when fail
