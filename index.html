@@ -22,7 +22,7 @@ $(function(){
 		})
 		.done((data)=>{console.log(data);
 				$('body').append(data.price_last);
-		     )}
+		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
 	});
