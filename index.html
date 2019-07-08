@@ -8,6 +8,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 $(function(){
+	var supply;
+	var eth_liq;
+	var price_internal;
+	var price_market;
 	$('#btn1').click(function(){
 		var dt = {a:1, b:2};
 		$.ajax({
@@ -18,7 +22,7 @@ $(function(){
 		})
 		.done((data)=>{console.log(data);
 			 
-				$('body').append("\n" + data.price + "DAI/ETH \n");
+				<!--$('body').append("\n" + data.price + "DAI/ETH \n");-->
 			       
 		     })
 		.fail((data)=>{console.log(data.responceText);})
@@ -31,13 +35,28 @@ $(function(){
 		
 			.done((data)=>{console.log(data);
 
-				       var supply = data.result * 1e-18;
+				       supply = data.result * 1e-18;
 				      
-				       $('body').append("\n UNI-V1:DAI token supply " + supply + "\n");
-				       
 		     })
 		.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
+		
+		
+		$.ajax({
+			url:"https://api.etherscan.io/api?module=account&action=balance&address=0x09cabEC1eAd1c0Ba254B09efb3EE13841712bE14&tag=latest",
+			dataType:"json",
+			data:dt})
+		
+			.done((data)=>{console.log(data);
+
+				       eth_liq = data.result * 1e-18;
+				      
+				     
+		     })
+		.fail((data)=>{console.log(data.responceText);})
+		.always((data)=>{console.log(data);});
+			       price_internal = eth_liq * 2 / supply;
+			       $('body').append("ineternal price" + price_internal + " ETH");
 	});
 });
 </script>
