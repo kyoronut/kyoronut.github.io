@@ -7,6 +7,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.uniswap.info');
+xhr.addEventListener('load', onLoadFunc, false);
+xhr.send(null);
 $(function(){
 	$('#btn1').click(function(){
 		var dt = {a:1, b:2};
@@ -16,10 +20,10 @@ $(function(){
 			dataType:"json",
 			data:dt
 		})
-		.done((data)=>{concole.log(data);
+		.done((data)=>{console.log(data);
 		$('body').append(data.price_last);
-		.fail((data)=>{concole.log(data.responceText);})
-		.always((data)=>{concole.log(data);});
+		.fail((data)=>{console.log(data.responceText);})
+		.always((data)=>{console.log(data);});
 	});
 });
 </script>
