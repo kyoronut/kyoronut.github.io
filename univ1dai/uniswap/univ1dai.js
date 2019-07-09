@@ -14,7 +14,7 @@ var mprice;
 function get_supply(){
 	return new Promise(function(resolve){
 			$.ajax({
-url:"https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14",
+url:"https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14&apikey=RYS83IQGH4XYNFC1HAC7UIU94NXEJHS3CQ",
 dataType:"json",
 })
 			.done((data)=>{console.log(data);
@@ -30,7 +30,7 @@ dataType:"json",
 function get_eth_in_univ1(){
 	return new Promise(function(resolve){
 			$.ajax({
-url:"https://api.etherscan.io/api?module=account&action=balance&address=0x09cabEC1eAd1c0Ba254B09efb3EE13841712bE14&tag=latest",
+url:"https://api.etherscan.io/api?module=account&action=balance&address=0x09cabEC1eAd1c0Ba254B09efb3EE13841712bE14&tag=latest&apikey=RYS83IQGH4XYNFC1HAC7UIU94NXEJHS3CQ",
 dataType:"json",
 })
 
@@ -58,7 +58,7 @@ Promise.all([get_supply(), get_eth_in_univ1()])
 function get_uniuni(){
 	return new Promise(function(resolve){
 			$.ajax({
-url:"https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest",
+url:"https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x09cabec1ead1c0ba254b09efb3ee13841712be14&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest&apikey=RYS83IQGH4XYNFC1HAC7UIU94NXEJHS3CQ",
 dataType:"json",
 })
 			.done((data)=>{console.log(data);
@@ -74,7 +74,7 @@ dataType:"json",
 function get_eth_uniuni(){
 	return new Promise(function(resolve){
 			$.ajax({
-url:"https://api.etherscan.io/api?module=account&action=balance&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest",
+url:"https://api.etherscan.io/api?module=account&action=balance&address=0x601c32E0580D3aef9437dB52D09f5a5D7E60eC22&tag=latest&apikey=RYS83IQGH4XYNFC1HAC7UIU94NXEJHS3CQ",
 dataType:"json",
 })
 
