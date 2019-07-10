@@ -19,7 +19,7 @@ dataType:"json",
 })
 			.done((data)=>{console.log(data);
 				supply = data.result * 1e-18;
-				univ1dai_tot_supply.innerHTML = supply.toFixed(3)
+				univ1dai_tot_supply.innerHTML = supply.toFixed(3);
 				resolve(supply);
 				})
 			.fail((data)=>{console.log(data.responceText);})
