@@ -2,11 +2,13 @@ var compound_price = document.getElementById("compound_price");
 var cdai_eth_price = document.getElementById("cdai_eth_price");
 var eth_dai_price = document.getElementById("eth_dai_price");
 var uniswap_price = document.getElementById("uniswap_price");
+var eth_in_dai_pool = document.getElementById("eth_in_dai_pool");
+var eth_in_cdai_pool = document.getElementById("eth_in_cdai_pool");
 var a_cdai_eth_price;
 var a_eth_dai_price;
-var eth_in_cdai_pool;
+var a_eth_in_cdai_pool;
 var cdai_in_cdai_pool;
-var eth_in_dai_pool;
+var a_eth_in_dai_pool;
 var dai_in_dai_pool;
 var cprice;
 var uprice;
@@ -57,8 +59,9 @@ dataType:"json",
 })
 
 			.done((data)=>{console.log(data);
-				eth_in_cdai_pool = data.result * 1e-18;
-				resolve(eth_in_cdai_pool);
+				a_eth_in_cdai_pool = data.result * 1e-18;
+				eth_in_cdai_pool.innerHTML = a_eth_in_cdai_pool.toFixed(1);
+				resolve(a_eth_in_cdai_pool);
 				})
 			.fail((data)=>{console.log(data.responceText);})
 			.always((data)=>{console.log(data);});
@@ -89,8 +92,9 @@ dataType:"json",
 })
 
 			.done((data)=>{console.log(data);
-				eth_in_dai_pool = data.result * 1e-18;
-				resolve(eth_in_dai_pool);
+				a_eth_in_dai_pool = data.result * 1e-18;
+				eth_in_dai_pool.innerHTML = a_eth_in_dai_pool.toFixed(1);
+				resolve(a_eth_in_dai_pool);
 				})
 			.fail((data)=>{console.log(data.responceText);})
 			.always((data)=>{console.log(data);});
