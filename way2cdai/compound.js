@@ -18,6 +18,8 @@ var ufeep2 = document.getElementById("ufeep2");
 var trading_amount = document.getElementById("trading_amount");
 var buy_dai_dex = document.getElementById("buy_dai_dex");
 var sell_dai_dex = document.getElementById("sell_dai_dex");
+var tmp_id = document.getElementById("tmp_id");
+tmp_id.innerHTML = "tmp"
 
 var a_cdai_eth_price;
 var a_eth_cdai_price;
