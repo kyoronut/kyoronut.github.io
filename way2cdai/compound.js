@@ -75,8 +75,9 @@ function get_price(){
 	.done((data)=>{console.log(data);
 		plotres(data, "");
 		console.log(cprice);
+		var a_cprice = Number(cprice);
 		compound_price.innerHTML = Number(cprice).toFixed(5);
-		resolve(cprice);
+		resolve(a_cprice);
 	})
 	.fail((data)=>{console.log(data.responceText);})
 		.always((data)=>{console.log(data);});
@@ -225,8 +226,6 @@ function get_sell_dai_info(){
 		cpricem = buy_dai_price * a_eth_dai_price * cprice;
 		cpricep = sell_dai_price * a_eth_dai_price * cprice;
 		//compound_price.innerHTML = buy
-		cpricem = sell_dai_price * a_eth_dai_price * cprice;
-		cpricep = buy_dai_price * a_eth_dai_price * cprice;
 		console.log(1 / a_eth_dai_price);
 		console.log(sell_dai_price * a_eth_dai_price);
 		console.log(buy_dai_price * a_eth_dai_price);
