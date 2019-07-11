@@ -223,8 +223,8 @@ function get_sell_dai_info(){
 		var a_buy_dai_dex = data[4][1];
 		var sell_dai_price = data[5][0];
 		var a_sell_dai_dex = data[5][1];
-		cpricem = buy_dai_price * a_eth_dai_price * cprice;
-		cpricep = sell_dai_price * a_eth_dai_price * cprice;
+		cpricep = buy_dai_price * a_eth_dai_price * cprice;
+		cpricem = sell_dai_price * a_eth_dai_price * cprice;
 		//compound_price.innerHTML = buy
 		console.log(1 / a_eth_dai_price);
 		console.log(sell_dai_price * a_eth_dai_price);
