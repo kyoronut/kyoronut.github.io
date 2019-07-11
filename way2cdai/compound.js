@@ -37,7 +37,7 @@ var ufee_primitive = 0.3;
 var a_ufee = ufee_primitive;
 var a_ufee2 = ufee_primitive * 2;
 var amount = 1000;
-var pfix = 2;
+var pfix = 5;
 
 ufeem.innerHTML = "-" + a_ufee + "%" ;
 ufeep.innerHTML = "+" + a_ufee + "%" ;
@@ -61,7 +61,7 @@ function plotres(response, prefix) {
 			}
 			if(response[key] == "cDAI"){
 				console.log(rate);
-				cprice = 1 / Number(rate);
+				cprice = Number(rate);
 			}
 		}
 	}
@@ -209,11 +209,11 @@ function get_sell_dai_info(){
 		a_cdai_eth_price = data[2] / data[3];
 		cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
 
-			uprice = 1 / (data[1] * data[2] / data[0] / data[3]); 
-		upricem = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
-		upricep = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee / 100); 
-		upricem2 = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee2 / 100); 
-		upricep2 = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee2 / 100); 
+			uprice = 1 * (data[1] * data[2] / data[0] / data[3]); 
+		upricem = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
+		upricep = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee / 100); 
+		upricem2 = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee2 / 100); 
+		upricep2 = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee2 / 100); 
 		console.log(uprice);
 		uniswap_price.innerHTML = uprice.toFixed(pfix);
 		uniswap_price_m.innerHTML = upricem.toFixed(pfix);
