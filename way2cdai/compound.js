@@ -2,8 +2,13 @@ var compound_price = document.getElementById("compound_price");
 var cdai_eth_price = document.getElementById("cdai_eth_price");
 var eth_dai_price = document.getElementById("eth_dai_price");
 var uniswap_price = document.getElementById("uniswap_price");
+var uniswap_price_m = document.getElementById("uniswap_price_m");
+var uniswap_price_p = document.getElementById("uniswap_price_p");
 var eth_in_dai_pool = document.getElementById("eth_in_dai_pool");
 var eth_in_cdai_pool = document.getElementById("eth_in_cdai_pool");
+var ufeem = document.getElementById("ufeem");
+var ufeep = document.getElementById("ufeep");
+
 var a_cdai_eth_price;
 var a_eth_dai_price;
 var a_eth_in_cdai_pool;
@@ -12,7 +17,13 @@ var a_eth_in_dai_pool;
 var dai_in_dai_pool;
 var cprice;
 var uprice;
+var upricem;
+var upricep;
 var rate;
+var a_ufee = 0.3 * 2;
+
+ufeem.innerHTML = "-" + a_ufee + "%" ;
+ufeep.innerHTML = "+" + a_ufee + "%" ;
 function plotres(response, prefix) {
 	for (var key in response){
 		if (typeof response[key] == "object") {
@@ -131,6 +142,10 @@ get_cdai_in_cdai_pool(),
 			cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
 
 			uprice = data[1] * data[2] / data[0] / data[3]; 
+			upricem = data[1] * data[2] / data[0] / data[3] * (1 - a_ufee / 100); 
+			upricep = data[1] * data[2] / data[0] / data[3] * (1 + a_ufee / 100); 
 			console.log(uprice);
 			uniswap_price.innerHTML = uprice.toFixed(5);
+			uniswap_price_m.innerHTML = upricem.toFixed(5);
+			uniswap_price_p.innerHTML = upricep.toFixed(5);
 			});

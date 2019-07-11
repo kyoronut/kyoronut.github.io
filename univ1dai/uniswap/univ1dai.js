@@ -4,6 +4,10 @@ var eth_in_univ1 = document.getElementById("eth_in_univ1");
 var eth_in_univ1univ1 = document.getElementById("eth_in_univ1univ1");
 var internal_price = document.getElementById("internal_price");
 var market_price = document.getElementById("market_price");
+var ufeem = document.getElementById("ufeem");
+var ufeep = document.getElementById("ufeep");
+var market_price_m = document.getElementById("market_price_m");
+var market_price_p = document.getElementById("market_price_p");
 
 var supply;
 var uniuni;
@@ -11,6 +15,12 @@ var eth_in;
 var eth_uniuni;
 var iprice;
 var mprice;
+var mpricem;
+var mpricep;
+var a_ufee = 0.3;
+
+ufeem.innerHTML = "-" + a_ufee + "%" ;
+ufeep.innerHTML = "+" + a_ufee + "%" ;
 function get_supply(){
 	return new Promise(function(resolve){
 			$.ajax({
@@ -52,7 +62,7 @@ Promise.all([get_supply(), get_eth_in_univ1()])
 	.then(function(data){
 			console.log(data);
 			iprice = data[1] * 2 / data[0];
-			internal_price.innerHTML = iprice.toFixed(3) + " ETH";
+			internal_price.innerHTML = iprice.toFixed(3) ;
 			});
 
 function get_uniuni(){
@@ -91,5 +101,10 @@ Promise.all([get_uniuni(), get_eth_uniuni()])
 	.then(function(data){
 			console.log(data);
 			mprice = data[1] / data[0];
-			market_price.innerHTML = mprice.toFixed(3) + " ETH";
+			market_price.innerHTML = mprice.toFixed(3);
+			mpricem = data[1] / data[0] * (1 - a_ufee / 100);
+			console.log(mpricem);
+			market_price_m.innerHTML = mpricem.toFixed(3);
+			mpricep = data[1] / data[0] * (1 + a_ufee / 100);
+			market_price_p.innerHTML = mpricep.toFixed(3);
 			});
