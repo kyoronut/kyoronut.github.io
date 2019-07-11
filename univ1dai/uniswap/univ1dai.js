@@ -8,6 +8,8 @@ var ufeem = document.getElementById("ufeem");
 var ufeep = document.getElementById("ufeep");
 var market_price_m = document.getElementById("market_price_m");
 var market_price_p = document.getElementById("market_price_p");
+var market_price_m2 = document.getElementById("market_price_m2");
+var market_price_p2 = document.getElementById("market_price_p2");
 
 var supply;
 var uniuni;
@@ -17,11 +19,16 @@ var iprice;
 var mprice;
 var mpricem;
 var mpricep;
+var mpricem2;
+var mpricep2;
 var a_ufee_primitive = 0.3;
-var a_ufee = a_ufee_primitive * 1.5;
+var a_ufee = a_ufee_primitive;
+var a_ufee2 = a_ufee_primitive * 1.5;
 
 ufeem.innerHTML = "-" + a_ufee.toFixed(2) + "%" ;
 ufeep.innerHTML = "+" + a_ufee.toFixed(2) + "%" ;
+ufeem2.innerHTML = "-" + a_ufee2.toFixed(2) + "%" ;
+ufeep2.innerHTML = "+" + a_ufee2.toFixed(2) + "%" ;
 function get_supply(){
 	return new Promise(function(resolve){
 			$.ajax({
@@ -103,9 +110,16 @@ Promise.all([get_uniuni(), get_eth_uniuni()])
 			console.log(data);
 			mprice = data[1] / data[0];
 			market_price.innerHTML = mprice.toFixed(3);
+
 			mpricem = data[1] / data[0] * (1 - a_ufee / 100);
-			console.log(mpricem);
 			market_price_m.innerHTML = mpricem.toFixed(3);
+
 			mpricep = data[1] / data[0] * (1 + a_ufee / 100);
 			market_price_p.innerHTML = mpricep.toFixed(3);
+			
+			mpricem2 = data[1] / data[0] * (1 - a_ufee2 / 100);
+			market_price_m2.innerHTML = mpricem2.toFixed(3);
+
+			mpricep2 = data[1] / data[0] * (1 + a_ufee2 / 100);
+			market_price_p2.innerHTML = mpricep2.toFixed(3);
 			});
