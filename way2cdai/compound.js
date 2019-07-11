@@ -2,6 +2,7 @@ var compound_price = document.getElementById("compound_price");
 var compound_price_m = document.getElementById("compound_price_m");
 var compound_price_p = document.getElementById("compound_price_p");
 var cdai_eth_price = document.getElementById("cdai_eth_price");
+var eth_cdai_price = document.getElementById("eth_cdai_price");
 var eth_dai_price = document.getElementById("eth_dai_price");
 var uniswap_price = document.getElementById("uniswap_price");
 var uniswap_price_m = document.getElementById("uniswap_price_m");
@@ -19,6 +20,7 @@ var buy_dai_dex = document.getElementById("buy_dai_dex");
 var sell_dai_dex = document.getElementById("sell_dai_dex");
 
 var a_cdai_eth_price;
+var a_eth_cdai_price;
 var a_eth_dai_price;
 var a_eth_in_cdai_pool;
 var cdai_in_cdai_pool;
@@ -207,7 +209,9 @@ function get_sell_dai_info(){
 		eth_dai_price.innerHTML = a_eth_dai_price.toFixed(2);
 
 		a_cdai_eth_price = data[2] / data[3];
+		a_eth_cdai_price = data[3] / data[2];
 		cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
+		eth_cdai_price.innerHTML = a_eth_cdai_price.toExponential(3)
 
 			uprice = 1 * (data[1] * data[2] / data[0] / data[3]); 
 		upricem = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
