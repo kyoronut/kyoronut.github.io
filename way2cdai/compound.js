@@ -4,10 +4,14 @@ var eth_dai_price = document.getElementById("eth_dai_price");
 var uniswap_price = document.getElementById("uniswap_price");
 var uniswap_price_m = document.getElementById("uniswap_price_m");
 var uniswap_price_p = document.getElementById("uniswap_price_p");
+var uniswap_price_m2 = document.getElementById("uniswap_price_m2");
+var uniswap_price_p2 = document.getElementById("uniswap_price_p2");
 var eth_in_dai_pool = document.getElementById("eth_in_dai_pool");
 var eth_in_cdai_pool = document.getElementById("eth_in_cdai_pool");
 var ufeem = document.getElementById("ufeem");
 var ufeep = document.getElementById("ufeep");
+var ufeem2 = document.getElementById("ufeem2");
+var ufeep2 = document.getElementById("ufeep2");
 
 var a_cdai_eth_price;
 var a_eth_dai_price;
@@ -19,11 +23,17 @@ var cprice;
 var uprice;
 var upricem;
 var upricep;
+var upricem2;
+var upricep2;
 var rate;
-var a_ufee = 0.3 * 2;
+var ufee_primitive = 0.3;
+var a_ufee = ufee_primitive;
+var a_ufee2 = ufee_primitive * 2;
 
 ufeem.innerHTML = "-" + a_ufee + "%" ;
 ufeep.innerHTML = "+" + a_ufee + "%" ;
+ufeem2.innerHTML = "-" + a_ufee2 + "%" ;
+ufeep2.innerHTML = "+" + a_ufee2 + "%" ;
 function plotres(response, prefix) {
 	for (var key in response){
 		if (typeof response[key] == "object") {
@@ -144,8 +154,12 @@ get_cdai_in_cdai_pool(),
 			uprice = data[1] * data[2] / data[0] / data[3]; 
 			upricem = data[1] * data[2] / data[0] / data[3] * (1 - a_ufee / 100); 
 			upricep = data[1] * data[2] / data[0] / data[3] * (1 + a_ufee / 100); 
+			upricem2 = data[1] * data[2] / data[0] / data[3] * (1 - a_ufee2 / 100); 
+			upricep2 = data[1] * data[2] / data[0] / data[3] * (1 + a_ufee2 / 100); 
 			console.log(uprice);
 			uniswap_price.innerHTML = uprice.toFixed(5);
 			uniswap_price_m.innerHTML = upricem.toFixed(5);
 			uniswap_price_p.innerHTML = upricep.toFixed(5);
+			uniswap_price_m2.innerHTML = upricem2.toFixed(5);
+			uniswap_price_p2.innerHTML = upricep2.toFixed(5);
 			});
