@@ -20,8 +20,8 @@ var mpricep;
 var a_ufee_primitive = 0.3;
 var a_ufee = a_ufee_primitive * 1.5;
 
-ufeem.innerHTML = "-" + a_ufee + "%" ;
-ufeep.innerHTML = "+" + a_ufee + "%" ;
+ufeem.innerHTML = "-" + a_ufee.toFixed(2) + "%" ;
+ufeep.innerHTML = "+" + a_ufee.toFixed(2) + "%" ;
 function get_supply(){
 	return new Promise(function(resolve){
 			$.ajax({
