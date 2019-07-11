@@ -37,6 +37,7 @@ var ufee_primitive = 0.3;
 var a_ufee = ufee_primitive;
 var a_ufee2 = ufee_primitive * 2;
 var amount = 1000;
+var pfix = 2;
 
 ufeem.innerHTML = "-" + a_ufee + "%" ;
 ufeep.innerHTML = "+" + a_ufee + "%" ;
@@ -60,7 +61,7 @@ function plotres(response, prefix) {
 			}
 			if(response[key] == "cDAI"){
 				console.log(rate);
-				cprice = rate;
+				cprice = 1 / Number(rate);
 			}
 		}
 	}
@@ -76,7 +77,7 @@ function get_price(){
 		plotres(data, "");
 		console.log(cprice);
 		var a_cprice = Number(cprice);
-		compound_price.innerHTML = Number(cprice).toFixed(5);
+		compound_price.innerHTML = Number(cprice).toFixed(pfix);
 		resolve(a_cprice);
 	})
 	.fail((data)=>{console.log(data.responceText);})
@@ -208,17 +209,17 @@ function get_sell_dai_info(){
 		a_cdai_eth_price = data[2] / data[3];
 		cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
 
-			uprice = data[1] * data[2] / data[0] / data[3]; 
-		upricem = data[1] * data[2] / data[0] / data[3] * (1 - a_ufee / 100); 
-		upricep = data[1] * data[2] / data[0] / data[3] * (1 + a_ufee / 100); 
-		upricem2 = data[1] * data[2] / data[0] / data[3] * (1 - a_ufee2 / 100); 
-		upricep2 = data[1] * data[2] / data[0] / data[3] * (1 + a_ufee2 / 100); 
+			uprice = 1 / (data[1] * data[2] / data[0] / data[3]); 
+		upricem = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
+		upricep = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee / 100); 
+		upricem2 = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee2 / 100); 
+		upricep2 = 1 / (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee2 / 100); 
 		console.log(uprice);
-		uniswap_price.innerHTML = uprice.toFixed(5);
-		uniswap_price_m.innerHTML = upricem.toFixed(5);
-		uniswap_price_p.innerHTML = upricep.toFixed(5);
-		uniswap_price_m2.innerHTML = upricem2.toFixed(5);
-		uniswap_price_p2.innerHTML = upricep2.toFixed(5);
+		uniswap_price.innerHTML = uprice.toFixed(pfix);
+		uniswap_price_m.innerHTML = upricem.toFixed(pfix);
+		uniswap_price_p.innerHTML = upricep.toFixed(pfix);
+		uniswap_price_m2.innerHTML = upricem2.toFixed(pfix);
+		uniswap_price_p2.innerHTML = upricep2.toFixed(pfix);
 		var buy_dai_price = data[4][0];
 		var a_buy_dai_dex = data[4][1];
 		var sell_dai_price = data[5][0];
@@ -231,8 +232,8 @@ function get_sell_dai_info(){
 		console.log(buy_dai_price * a_eth_dai_price);
 		console.log(cpricem);
 		console.log(cpricep);
-		compound_price_m.innerHTML = Number(cpricem).toFixed(5);
-		compound_price_p.innerHTML = Number(cpricep).toFixed(5);
+		compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
+		compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
 		buy_dai_dex.innerHTML = String(a_buy_dai_dex);
 		sell_dai_dex.innerHTML = String(a_sell_dai_dex);
 		
