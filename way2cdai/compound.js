@@ -213,7 +213,7 @@ function get_sell_dai_info(){
 		a_cdai_eth_price = data[2] / data[3];
 		a_eth_cdai_price = data[3] / data[2];
 		cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
-		eth_cdai_price.innerHTML = a_eth_cdai_price.toExponential(3)
+		eth_cdai_price.innerHTML = Number(a_eth_cdai_price).toExponential(3)
 
 			uprice = 1 * (data[1] * data[2] / data[0] / data[3]); 
 		upricem = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
