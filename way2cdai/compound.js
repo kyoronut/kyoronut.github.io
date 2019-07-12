@@ -273,8 +273,8 @@ function get_sell_dai_info(val){
 
 
 
-				ufeem2.innerHTML = "sell for DAI*" ;
-				ufeep2.innerHTML = "buy with DAI*" ;
+				ufeem2.innerHTML = "sell for DAI" ;
+				ufeep2.innerHTML = "buy with DAI" ;
 
 				uniswap_price_m.innerHTML = "("+String(upricem.toFixed(pfix))+")";
 				uniswap_price_p.innerHTML = "("+String(upricep.toFixed(pfix))+")";

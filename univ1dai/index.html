@@ -81,7 +81,7 @@
 
 				  <div class="col-xs-4">
 					  <h2 id="internal_price_m">__</h2>
-					  <p>unband and sell DAI for ETH at <span id = "sell_dai_dex">__</span>*</p>
+					  <p id = "sell_dai_dex">_</p>
 				  </div>
 
 				  <div class="col-xs-4">
@@ -93,13 +93,9 @@
 
 				  <div class="col-xs-4">
 					  <h2 id="internal_price_p">__</h2>
-					  <p>buy DAI with ETH at <span id = "buy_dai_dex">__</span>* and band</p>
+					  <p id = "buy_dai_dex">_</p>
 				  </div>
 
-				  <div class="col-xs-12">
-					  <p>*Basing on <span id = "trading_amount">__
-					  </span> DAI trading. Source: Uniswap, Bancor, Kyber, RadarRelay.</p>
-				  </div>
 			  </div>
 
 		  </div>
@@ -149,6 +145,7 @@
 	   <div id="service">
 		   <div class="container">
 			   <div class="row centered">
+
 				   <div class="col-xs-6">
 					   <h4>(a)</h4>
 					   <p>UNI-V1:DAI total supply</p>
@@ -182,6 +179,10 @@
 					   <br><br>
 				   </div>
 
+			   </div>
+			   <div class="col-xs-12">
+				   <p>*Best rate found from DEXes: Uniswap, Bancor, Kyber, RadarRelay.</p>
+				   <p hidden id = "trading_amount"></p>
 			   </div>
 		   </div>
 
