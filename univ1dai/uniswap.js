@@ -20,6 +20,8 @@ var supply;
 var uniuni;
 var eth_in;
 var eth_uniuni;
+var dai_in_univ1;
+var eth_dai_price
 var iprice;
 var ipricem;
 var ipricep;
@@ -35,14 +37,12 @@ var dexag_rate_buy_dai;
 var dexag_rate_buy_dai_inv;
 var dexag_dex_buy_dai;
 var amount = 1000;
+var half_amount;
 
-ufeem.innerHTML = "-" + a_ufee.toFixed(2) + "%" ;
-ufeep.innerHTML = "+" + a_ufee.toFixed(2) + "%" ;
 /*
    ufeem2.innerHTML = "-" + a_ufee2.toFixed(2) + "%" ;
    ufeep2.innerHTML = "+" + a_ufee2.toFixed(2) + "%" ;
    */
-trading_amount.innerHTML = amount;
 
 
 function get_supply(){
@@ -118,7 +118,7 @@ function get_dai_in_univ1(){
 			dataType:"json",
 		})
 		.done((data)=>{console.log(data);
-			var dai_in_univ1 = data.result * 1e-18;
+			dai_in_univ1 = data.result * 1e-18;
 			console.log(dai_in_univ1);
 			resolve(dai_in_univ1);
 		})
@@ -127,10 +127,11 @@ function get_dai_in_univ1(){
 	})
 };//);
 
-function get_buy_dai_info(){
+function get_buy_dai_info(val){
+	console.log(val);
 	return new Promise(function(resolve){
 		$.ajax({
-			url:"https://api.dex.ag/trade?from=ETH&to=DAI&toAmount="+ amount +"&dex=best",
+			url:"https://api.dex.ag/trade?from=ETH&to=DAI&toAmount="+ String(val.toFixed(3)) +"&dex=best",
 			dataType:"json",
 		})
 
@@ -147,10 +148,11 @@ function get_buy_dai_info(){
 			.always((data)=>{console.log(data);});
 	})
 };
-function get_sell_dai_info(){
+function get_sell_dai_info(val){
+	console.log(val);
 	return new Promise(function(resolve){
 		$.ajax({
-			url:"https://api.dex.ag/trade?from=DAI&to=ETH&fromAmount="+ amount +"&dex=best",
+			url:"https://api.dex.ag/trade?from=DAI&to=ETH&fromAmount="+ String(val.toFixed(3)) +"&dex=best",
 			dataType:"json",
 		})
 
@@ -172,9 +174,7 @@ function get_sell_dai_info(){
 			get_eth_uniuni(),//1
 			get_supply(), //2
 			get_eth_in_univ1(),//3
-			get_dai_in_univ1(),//4
-			get_buy_dai_info(),//5
-			get_sell_dai_info()//6
+			get_dai_in_univ1()//4
 	])
 	.then(function(data){
 		console.log(data);
@@ -184,11 +184,7 @@ function get_sell_dai_info(){
 		mprice = data[1] / data[0];
 		market_price.innerHTML = mprice.toFixed(3);
 
-		mpricem = data[1] / data[0] * (1 - a_ufee / 100);
-		market_price_m.innerHTML = mpricem.toFixed(3);
 
-		mpricep = data[1] / data[0] * (1 + a_ufee / 100);
-		market_price_p.innerHTML = mpricep.toFixed(3);
 
 		mpricem2 = data[1] / data[0] * (1 - a_ufee2 / 100);
 		//market_price_m2.innerHTML = mpricem2.toFixed(3);
@@ -196,27 +192,62 @@ function get_sell_dai_info(){
 		mpricep2 = data[1] / data[0] * (1 + a_ufee2 / 100);
 		//market_price_p2.innerHTML = mpricep2.toFixed(3);
 
-		//dexag etc
-		var dai_in_univ1 = data[4];
-		var buy_dai_price = data[5][0];
-		var a_buy_dai_dex = data[5][1];
-		var sell_dai_price = data[6][0];
-		var a_sell_dai_dex = data[6][1];
-		var eth_price = dai_in_univ1 / eth_in;
-		var buy_dai_spread = buy_dai_price * eth_price;
-		var sell_dai_spread = sell_dai_price * eth_price;
-		var ipricep = (0.5 + 0.5 * buy_dai_spread) * iprice;
-		var ipricem = (0.5 + 0.5 * sell_dai_spread) * iprice;
-		internal_price_m.innerHTML = ipricem.toFixed(3) ;
-		internal_price_p.innerHTML = ipricep.toFixed(3) ;
-		buy_dai_dex.innerHTML = String(a_buy_dai_dex);
-		sell_dai_dex.innerHTML = String(a_sell_dai_dex);
-		console.log("uniswap dai price in eth " + String(1/eth_price));
-		console.log("buy dai price in eth     " + String(1/buy_dai_price));
-		console.log("sell dai price in eth    " + String(1/sell_dai_price));
-		console.log("uniswap eth price in dai " + String(eth_price));
-		console.log("sell eth price in dai     " + String(buy_dai_price));
-		console.log("buy eth price in dai    " + String(sell_dai_price));
+		console.log("diff: " + String(Math.abs(1 - iprice/mprice) * eth_uniuni));
+		console.log(dai_in_univ1);
+		eth_dai_price = dai_in_univ1 / eth_in;
+		console.log(eth_dai_price);
+		amount = Math.abs(1 - iprice/mprice) * eth_uniuni * eth_dai_price;
+		//Divide for optimal amount
+		amount = amount / 2;
+		//Divide for buy half dai
+		half_amount = amount / 2;
+		console.log(amount);
 
+		Promise.all([
+				get_buy_dai_info(half_amount),
+				get_sell_dai_info(half_amount),
+		]).then(function(data2){
+			//dexag etc
+			var eth_price = eth_dai_price;
+			var buy_dai_price = data2[0][0];
+			var a_buy_dai_dex = data2[0][1];
+			var sell_dai_price = data2[1][0];
+			var a_sell_dai_dex = data2[1][1];
+			var buy_dai_spread = buy_dai_price * eth_price;
+			var sell_dai_spread = sell_dai_price * eth_price;
+			var ipricep = (0.5 + 0.5 * buy_dai_spread) * iprice;
+			var ipricem = (0.5 + 0.5 * sell_dai_spread) * iprice;
+			internal_price_m.innerHTML = ipricem.toFixed(3) ;
+			internal_price_p.innerHTML = ipricep.toFixed(3) ;
+			buy_dai_dex.innerHTML = String(a_buy_dai_dex);
+			sell_dai_dex.innerHTML = String(a_sell_dai_dex);
+			trading_amount.innerHTML = half_amount.toFixed(0);
+			
+			//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
+			amount_eth = amount / eth_price;
 
+			numeratorp = amount_eth * uniuni * (1 - a_ufee /100);
+			denominatorp = eth_uniuni + amount_eth * (1 - a_ufee / 100);
+			output = numeratorp / denominatorp;
+			mpricep = amount_eth / output;
+			market_price_p.innerHTML = mpricep.toFixed(3);
+			
+			spread = 2 * (mpricep - mprice) / (mpricep + mprice);
+			mpricem = (1 - spread) * mprice;
+
+			market_price_m.innerHTML = mpricem.toFixed(3);
+			console.log(spread);
+
+			description = String(amount.toFixed(0)) + " DAI worth ETH"
+			ufeem.innerHTML = "sell for " + description;
+			ufeep.innerHTML = "buy with " + description ;
+			if(iprice > mprice){
+			market_price_m.innerHTML = "";
+			ufeem.innerHTML = "" ;
+			}else{
+				market_price_p.innerHTML = "";
+				ufeep.innerHTML = "" ;
+			}
+
+		});
 	});
