@@ -1,3 +1,4 @@
+const slip = 0.001;
 var univ1dai_tot_supply = document.getElementById("univ1dai_tot_supply");
 var univ1_in_univ1= document.getElementById("univ1_in_univ1");
 var eth_in_univ1 = document.getElementById("eth_in_univ1");
@@ -196,9 +197,10 @@ function get_sell_dai_info(val){
 		console.log(dai_in_univ1);
 		eth_dai_price = dai_in_univ1 / eth_in;
 		console.log(eth_dai_price);
-		amount = Math.abs(1 - iprice/mprice) * eth_uniuni * eth_dai_price;
+		//amount = Math.abs(1 - iprice/mprice) * eth_uniuni * eth_dai_price;
+		amount = slip * eth_uniuni * eth_dai_price;
 		//Divide for optimal amount
-		amount = amount / 2;
+		//amount = Math.sqrt(amount);
 		//Divide for buy half dai
 		half_amount = amount / 2;
 		console.log(amount);

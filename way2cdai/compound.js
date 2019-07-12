@@ -1,3 +1,4 @@
+const slip = 0.001;
 var compound_price = document.getElementById("compound_price");
 var compound_price_m = document.getElementById("compound_price_m");
 var compound_price_p = document.getElementById("compound_price_p");
@@ -18,16 +19,14 @@ var ufeep2 = document.getElementById("ufeep2");
 var trading_amount = document.getElementById("trading_amount");
 var buy_dai_dex = document.getElementById("buy_dai_dex");
 var sell_dai_dex = document.getElementById("sell_dai_dex");
-var tmp_id = document.getElementById("tmp_id");
-tmp_id.innerHTML = "tmp"
 
 var a_cdai_eth_price;
 var a_eth_cdai_price;
 var a_eth_dai_price;
 var a_eth_in_cdai_pool;
-var cdai_in_cdai_pool;
+var a_cdai_in_cdai_pool;
 var a_eth_in_dai_pool;
-var dai_in_dai_pool;
+var a_dai_in_dai_pool;
 var cprice;
 var cpricem;
 var cpricep;
@@ -43,11 +42,6 @@ var a_ufee2 = ufee_primitive * 2;
 var amount = 1000;
 var pfix = 5;
 
-ufeem.innerHTML = "-" + a_ufee + "%" ;
-ufeep.innerHTML = "+" + a_ufee + "%" ;
-ufeem2.innerHTML = "-" + a_ufee2 + "%" ;
-ufeep2.innerHTML = "+" + a_ufee2 + "%" ;
-trading_amount.innerHTML = amount;
 
 function plotres(response, prefix) {
 	for (var key in response){
@@ -73,19 +67,19 @@ function plotres(response, prefix) {
 }
 function get_price(){
 	return new Promise(function(resolve){
-	$.ajax({
-		url:"https://api.stage.compound.finance/api/v2/ctoken",
-		dataType:"json",
-	})
-	.done((data)=>{console.log(data);
-		plotres(data, "");
-		console.log(cprice);
-		var a_cprice = Number(cprice);
-		compound_price.innerHTML = Number(cprice).toFixed(pfix);
-		resolve(a_cprice);
-	})
-	.fail((data)=>{console.log(data.responceText);})
-		.always((data)=>{console.log(data);});
+		$.ajax({
+			url:"https://api.stage.compound.finance/api/v2/ctoken",
+			dataType:"json",
+		})
+		.done((data)=>{console.log(data);
+			plotres(data, "");
+			console.log(cprice);
+			var a_cprice = Number(cprice);
+			compound_price.innerHTML = Number(cprice).toFixed(pfix);
+			resolve(a_cprice);
+		})
+		.fail((data)=>{console.log(data.responceText);})
+			.always((data)=>{console.log(data);});
 	});
 };
 
@@ -115,8 +109,8 @@ function get_cdai_in_cdai_pool(){
 			dataType:"json",
 		})
 		.done((data)=>{console.log(data);
-			cdai_in_cdai_pool = data.result * 1e-8;
-			resolve(cdai_in_cdai_pool);
+			a_cdai_in_cdai_pool = data.result * 1e-8;
+			resolve(a_cdai_in_cdai_pool);
 		})
 		.fail((data)=>{console.log(data.responceText);})
 			.always((data)=>{console.log(data);});
@@ -148,17 +142,20 @@ function get_dai_in_dai_pool(){
 			dataType:"json",
 		})
 		.done((data)=>{console.log(data);
-			dai_in_dai_pool = data.result * 1e-18;
-			resolve(dai_in_dai_pool);
+			a_dai_in_dai_pool = data.result * 1e-18;
+			resolve(a_dai_in_dai_pool);
 		})
 		.fail((data)=>{console.log(data.responceText);})
 			.always((data)=>{console.log(data);});
 	})
 };//);
-function get_buy_dai_info(){
+
+
+function get_buy_dai_info(val){
+	console.log(val);
 	return new Promise(function(resolve){
 		$.ajax({
-			url:"https://api.dex.ag/trade?from=ETH&to=DAI&toAmount="+ amount +"&dex=best",
+			url:"https://api.dex.ag/trade?from=ETH&to=DAI&toAmount="+ String(val.toFixed(3)) +"&dex=best",
 			dataType:"json",
 		})
 
@@ -175,10 +172,11 @@ function get_buy_dai_info(){
 			.always((data)=>{console.log(data);});
 	})
 };
-function get_sell_dai_info(){
+function get_sell_dai_info(val){
+	console.log(val);
 	return new Promise(function(resolve){
 		$.ajax({
-			url:"https://api.dex.ag/trade?from=DAI&to=ETH&fromAmount="+ amount +"&dex=best",
+			url:"https://api.dex.ag/trade?from=DAI&to=ETH&fromAmount="+ String(val.toFixed(3)) +"&dex=best",
 			dataType:"json",
 		})
 
@@ -195,14 +193,14 @@ function get_sell_dai_info(){
 			.always((data)=>{console.log(data);});
 	})
 };
+
+
 	Promise.all([
 			get_eth_in_dai_pool(),//0
 			get_dai_in_dai_pool(),//1
 			get_eth_in_cdai_pool(),//2
 			get_cdai_in_cdai_pool(),//3
-			get_buy_dai_info(),//4
-			get_sell_dai_info(),//5
-			get_price(),//6
+			get_price(),//4
 	])
 	.then(function(data){
 		console.log(data);
@@ -213,48 +211,96 @@ function get_sell_dai_info(){
 		a_cdai_eth_price = data[2] / data[3];
 		a_eth_cdai_price = data[3] / data[2];
 		cdai_eth_price.innerHTML = a_cdai_eth_price.toExponential(3)
-		eth_cdai_price.innerHTML = Number(a_eth_cdai_price).toExponential(3)
+			eth_cdai_price.innerHTML = Number(a_eth_cdai_price).toExponential(3)
 
 			uprice = 1 * (data[1] * data[2] / data[0] / data[3]); 
-		upricem = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee / 100); 
-		upricep = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee / 100); 
-		upricem2 = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 - a_ufee2 / 100); 
-		upricep2 = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee2 / 100); 
-		console.log(uprice);
 		uniswap_price.innerHTML = uprice.toFixed(pfix);
-		uniswap_price_m.innerHTML = "<" + String(upricem.toFixed(pfix));
-		uniswap_price_p.innerHTML = String(upricep.toFixed(pfix)) + "<";
-		uniswap_price_m2.innerHTML = "<" + String(upricem2.toFixed(pfix));
-		uniswap_price_p2.innerHTML = String(upricep2.toFixed(pfix)) + "<";
-		var buy_dai_price = data[4][0];
-		var a_buy_dai_dex = data[4][1];
-		var sell_dai_price = data[5][0];
-		var a_sell_dai_dex = data[5][1];
-		cpricep = buy_dai_price * a_eth_dai_price * cprice;
-		cpricem = sell_dai_price * a_eth_dai_price * cprice;
-		//compound_price.innerHTML = buy
-		console.log(1 / a_eth_dai_price);
-		console.log(sell_dai_price * a_eth_dai_price);
-		console.log(buy_dai_price * a_eth_dai_price);
-		console.log(cpricem);
-		console.log(cpricep);
-		compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
-		compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
-		buy_dai_dex.innerHTML = String(a_buy_dai_dex);
-		sell_dai_dex.innerHTML = String(a_sell_dai_dex);
-		if(cprice > uprice){
-		uniswap_price_m.innerHTML = "";
-		uniswap_price_m2.innerHTML = "";
-		ufeem.innerHTML = "";
-		ufeem2.innerHTML = "";
-		}
-		else{
-		uniswap_price_p.innerHTML = "";
-		uniswap_price_p2.innerHTML = "";
-		ufeep.innerHTML = "";
-		ufeep2.innerHTML = "";
-		}
-		
+		//amount = Math.abs(1 - uprice/Number(cprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
+		//amount = Math.sqrt(amount);
+		amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
+		trading_amount.innerHTML = amount.toFixed(0);
 
-		
+		Promise.all([get_buy_dai_info(amount), get_sell_dai_info(amount)])
+			.then(function(data2){
+				var buy_dai_price = data2[0][0];
+				var a_buy_dai_dex = data2[0][1];
+				var sell_dai_price = data2[1][0];
+				var a_sell_dai_dex = data2[1][1];
+				cpricep = buy_dai_price * a_eth_dai_price * cprice;
+				cpricem = sell_dai_price * a_eth_dai_price * cprice;
+				compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
+				compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
+				buy_dai_dex.innerHTML = String(a_buy_dai_dex);
+				sell_dai_dex.innerHTML = String(a_sell_dai_dex);
+
+				//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
+				//ETH to cDAI trade projection to DAI/cDAI price
+				amount_eth = amount / a_eth_dai_price;
+				numeratorp = amount_eth * a_cdai_in_cdai_pool * (1 - a_ufee /100);
+				denominatorp = a_eth_in_cdai_pool + amount_eth * (1 - a_ufee / 100);
+				output = numeratorp / denominatorp;
+				upricep = amount_eth / output / a_cdai_eth_price * uprice;
+				spread = 2 * (upricep - uprice) / (upricep + uprice);
+				upricem = (1 - spread) * uprice;
+				
+				description1 = "(projected ETH trade)";
+				ufeem.innerHTML = description1;
+				ufeep.innerHTML = description1;
+				
+				//DAI to cDAI trade
+				//TokenA to ETH (DAI to ETH)
+					inputAmountA = amount;
+					 inputReserveA = a_dai_in_dai_pool;
+					 outputReserveA = a_eth_in_dai_pool; 
+
+					 numeratorA = inputAmountA * outputReserveA * (1 - a_ufee /100);
+					 denominatorA = inputReserveA + inputAmountA * (1 - a_ufee / 100);
+					 outputAmountA = numeratorA / denominatorA;
+
+					// ETH to TokenB conversion (ETH to cDAI)
+					 inputAmountB = outputAmountA;
+					 inputReserveB = a_eth_in_cdai_pool;
+					 outputReserveB = a_cdai_in_cdai_pool;
+
+					 numeratorB = inputAmountB * outputReserveB * (1 - a_ufee / 100);
+					 denominatorB = inputReserveB  + inputAmountB * (1 - a_ufee / 100);
+					 outputAmountB = numeratorB / denominatorB;
+
+					 upricep2 = 1 / (outputAmountB / inputAmountA);
+					 spread2 = 2 * (upricep2 - uprice) / (upricep2 + uprice);
+					 upricem2 = (1 - spread2) * uprice;
+
+
+
+
+				ufeem2.innerHTML = "sell for DAI*" ;
+				ufeep2.innerHTML = "buy with DAI*" ;
+
+				uniswap_price_m.innerHTML = "("+String(upricem.toFixed(pfix))+")";
+				uniswap_price_p.innerHTML = "("+String(upricep.toFixed(pfix))+")";
+				uniswap_price_m2.innerHTML = String(upricem2.toFixed(pfix));
+				uniswap_price_p2.innerHTML = String(upricep2.toFixed(pfix));
+
+
+
+
+				if(cprice > uprice){
+					uniswap_price_m.innerHTML = "";
+					uniswap_price_m2.innerHTML = "";
+					ufeem.innerHTML = "";
+					ufeem2.innerHTML = "";
+				}
+				else{
+					uniswap_price_p.innerHTML = "";
+					uniswap_price_p2.innerHTML = "";
+					ufeep.innerHTML = "";
+					ufeep2.innerHTML = "";
+				}
+
+			});
+
+
+
+
+
 	});
