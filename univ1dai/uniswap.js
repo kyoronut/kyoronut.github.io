@@ -238,7 +238,7 @@ function get_sell_dai_info(val){
 			market_price_m.innerHTML = mpricem.toFixed(3);
 			console.log(spread);
 
-			description = String(amount.toFixed(0)) + " DAI worth ETH"
+			description = String(amount.toFixed(0)) + " DAI worth of ETH"
 			ufeem.innerHTML = "sell for " + description;
 			ufeep.innerHTML = "buy with " + description ;
 			if(iprice > mprice){
