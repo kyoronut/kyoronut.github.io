@@ -222,10 +222,10 @@ function get_sell_dai_info(){
 		upricep2 = 1 * (data[1] * data[2] / data[0] / data[3]) * (1 + a_ufee2 / 100); 
 		console.log(uprice);
 		uniswap_price.innerHTML = uprice.toFixed(pfix);
-		uniswap_price_m.innerHTML = upricem.toFixed(pfix);
-		uniswap_price_p.innerHTML = upricep.toFixed(pfix);
-		uniswap_price_m2.innerHTML = upricem2.toFixed(pfix);
-		uniswap_price_p2.innerHTML = upricep2.toFixed(pfix);
+		uniswap_price_m.innerHTML = "<" + String(upricem.toFixed(pfix));
+		uniswap_price_p.innerHTML = String(upricep.toFixed(pfix)) + "<";
+		uniswap_price_m2.innerHTML = "<" + String(upricem2.toFixed(pfix));
+		uniswap_price_p2.innerHTML = String(upricep2.toFixed(pfix)) + "<";
 		var buy_dai_price = data[4][0];
 		var a_buy_dai_dex = data[4][1];
 		var sell_dai_price = data[5][0];
@@ -242,6 +242,18 @@ function get_sell_dai_info(){
 		compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
 		buy_dai_dex.innerHTML = String(a_buy_dai_dex);
 		sell_dai_dex.innerHTML = String(a_sell_dai_dex);
+		if(cprice > uprice){
+		uniswap_price_m.innerHTML = "";
+		uniswap_price_m2.innerHTML = "";
+		ufeem.innerHTML = "";
+		ufeem2.innerHTML = "";
+		}
+		else{
+		uniswap_price_p.innerHTML = "";
+		uniswap_price_p2.innerHTML = "";
+		ufeep.innerHTML = "";
+		ufeep2.innerHTML = "";
+		}
 		
 
 		
