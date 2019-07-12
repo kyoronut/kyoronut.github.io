@@ -223,7 +223,7 @@ function get_sell_dai_info(val){
 			internal_price_p.innerHTML = ipricep.toFixed(3) ;
 			buy_dai_dex.innerHTML = String(a_buy_dai_dex);
 			sell_dai_dex.innerHTML = String(a_sell_dai_dex);
-			trading_amount.innerHTML = half_amount.toFixed(0);
+			trading_amount.innerHTML = half_amount.toFixed(1);
 			
 			//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
 			amount_eth = amount / eth_price;
@@ -240,7 +240,7 @@ function get_sell_dai_info(val){
 			market_price_m.innerHTML = mpricem.toFixed(3);
 			console.log(spread);
 
-			description = String(amount.toFixed(0)) + " DAI worth of ETH"
+			description = String(amount.toFixed(1)) + " DAI worth of ETH"
 			ufeem.innerHTML = "sell for " + description;
 			ufeep.innerHTML = "buy with " + description ;
 			if(iprice > mprice){
