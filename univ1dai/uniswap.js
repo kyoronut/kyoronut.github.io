@@ -1,4 +1,5 @@
 const slip = 0.001;
+var assumption = document.getElementById("assumption");
 var univ1dai_tot_supply = document.getElementById("univ1dai_tot_supply");
 var univ1_in_univ1= document.getElementById("univ1_in_univ1");
 var eth_in_univ1 = document.getElementById("eth_in_univ1");
@@ -39,6 +40,7 @@ var dexag_rate_buy_dai_inv;
 var dexag_dex_buy_dai;
 var amount = 1000;
 var half_amount;
+var amount_eth;
 
 /*
    ufeem2.innerHTML = "-" + a_ufee2.toFixed(2) + "%" ;
@@ -204,6 +206,11 @@ function get_sell_dai_info(val){
 		//Divide for buy half dai
 		half_amount = amount / 2;
 		console.log(amount);
+		amount_eth = amount / eth_dai_price;
+
+
+		assumption.innerHTML = String(amount_eth.toFixed(2)) 
+			+ " ETH (~" + String(amount.toFixed(0))+ " DAI)";
 
 		Promise.all([
 				get_buy_dai_info(half_amount),
@@ -228,8 +235,6 @@ function get_sell_dai_info(val){
 			trading_amount.innerHTML = half_amount.toFixed(0);
 			
 			//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
-			amount_eth = amount / eth_price;
-
 			numeratorp = amount_eth * uniuni * (1 - a_ufee /100);
 			denominatorp = eth_uniuni + amount_eth * (1 - a_ufee / 100);
 			output = numeratorp / denominatorp;
@@ -242,7 +247,7 @@ function get_sell_dai_info(val){
 			market_price_m.innerHTML = mpricem.toFixed(3);
 			console.log(spread);
 
-			description = String(amount.toFixed(0)) + " DAI worth of ETH"
+			description = String(amount_eth.toFixed(2)) + " ETH"
 			ufeem.innerHTML = "sell for " + description;
 			ufeep.innerHTML = "buy with " + description ;
 			if(iprice > mprice){
