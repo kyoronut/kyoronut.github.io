@@ -40,6 +40,7 @@ var ufee_primitive = 0.3;
 var a_ufee = ufee_primitive;
 var a_ufee2 = ufee_primitive * 2;
 var amount = 1000;
+var amount_eth;
 var pfix = 5;
 
 
@@ -218,7 +219,9 @@ function get_sell_dai_info(val){
 		//amount = Math.abs(1 - uprice/Number(cprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
 		//amount = Math.sqrt(amount);
 		amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
-		trading_amount.innerHTML = amount.toFixed(0);
+		amount_eth = amount / a_eth_dai_price;
+		trading_amount.innerHTML = String(amount.toFixed(0))
+			+ " DAI (~" + String(amount_eth.toFixed(2)) + " ETH)";
 
 		Promise.all([get_buy_dai_info(amount), get_sell_dai_info(amount)])
 			.then(function(data2){
@@ -235,7 +238,6 @@ function get_sell_dai_info(val){
 
 				//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
 				//ETH to cDAI trade projection to DAI/cDAI price
-				amount_eth = amount / a_eth_dai_price;
 				numeratorp = amount_eth * a_cdai_in_cdai_pool * (1 - a_ufee /100);
 				denominatorp = a_eth_in_cdai_pool + amount_eth * (1 - a_ufee / 100);
 				output = numeratorp / denominatorp;
