@@ -19,7 +19,13 @@ var ufeep2 = document.getElementById("ufeep2");
 var trading_amount = document.getElementById("trading_amount");
 var buy_dai_dex = document.getElementById("buy_dai_dex");
 var sell_dai_dex = document.getElementById("sell_dai_dex");
+var spread_center = document.getElementById("spread_center");
+var spread_cross0 = document.getElementById("spread_cross0");
+var spread_cross1 = document.getElementById("spread_cross1");
 
+var a_spread_center;
+var a_spread_cross0 = new Array(2);
+var a_spread_cross1 = new Array(2);
 var a_cdai_eth_price;
 var a_eth_cdai_price;
 var a_eth_dai_price;
@@ -218,10 +224,14 @@ function get_sell_dai_info(val){
 		uniswap_price.innerHTML = uprice.toFixed(pfix);
 		//amount = Math.abs(1 - uprice/Number(cprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
 		//amount = Math.sqrt(amount);
-		amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
+		//amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
+		target_price = (cprice + uprice) / 2;
+		amount = Math.abs(1 - Math.sqrt(target_price/uprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
 		amount_eth = amount / a_eth_dai_price;
 		trading_amount.innerHTML = String(amount.toFixed(0))
 			+ " DAI (~" + String(amount_eth.toFixed(2)) + " ETH)";
+		a_spread_center = 2 * (uprice - cprice) / (uprice + cprice) * 100;
+		spread_center.innerHTML = "Spread (Uni - Comp): " + a_spread_center.toFixed(2) + "%";
 
 		Promise.all([get_buy_dai_info(amount), get_sell_dai_info(amount)])
 			.then(function(data2){
@@ -245,7 +255,7 @@ function get_sell_dai_info(val){
 				spread = 2 * (upricep - uprice) / (upricep + uprice);
 				upricem = (1 - spread) * uprice;
 				
-				description1 = "(projected ETH trade)";
+				description1 = "ETH trade";
 				ufeem.innerHTML = description1;
 				ufeep.innerHTML = description1;
 				
@@ -275,29 +285,30 @@ function get_sell_dai_info(val){
 
 
 
-				ufeem2.innerHTML = "sell for DAI" ;
-				ufeep2.innerHTML = "buy with DAI" ;
+				ufeem2.innerHTML = "DAI trade" ;
+				ufeep2.innerHTML = "DAI trade" ;
 
 				uniswap_price_m.innerHTML = "("+String(upricem.toFixed(pfix))+")";
 				uniswap_price_p.innerHTML = "("+String(upricep.toFixed(pfix))+")";
 				uniswap_price_m2.innerHTML = String(upricem2.toFixed(pfix));
 				uniswap_price_p2.innerHTML = String(upricep2.toFixed(pfix));
 
+				a_spread_cross0 = [
+					2 * (upricep - cpricem) / (upricep + cpricem) * 100,
+					2 * (upricep2 - cpricem) / (upricep2 + cpricem) * 100
+				];
+				a_spread_cross1 = [
+					2 * (cpricep - upricem) / (cpricep + upricem) * 100,
+					2 * (cpricep - upricem2) / (cpricep + upricem2) * 100
+				];
+				spread_cross0.innerHTML = "UniBuy - Burn&Sell: " 
+					+ a_spread_cross0[1].toFixed(2) + "%"
+					+ " (" + a_spread_cross0[0].toFixed(2) + "%)"
+					;
+				spread_cross1.innerHTML = "Buy&Mint - UniSell: "
+					+ a_spread_cross1[1].toFixed(2) + "%"
+					+ " (" + a_spread_cross1[0].toFixed(2) + "%)"
 
-
-
-				if(cprice > uprice){
-					uniswap_price_m.innerHTML = "";
-					uniswap_price_m2.innerHTML = "";
-					ufeem.innerHTML = "";
-					ufeem2.innerHTML = "";
-				}
-				else{
-					uniswap_price_p.innerHTML = "";
-					uniswap_price_p2.innerHTML = "";
-					ufeep.innerHTML = "";
-					ufeep2.innerHTML = "";
-				}
 
 			});
 

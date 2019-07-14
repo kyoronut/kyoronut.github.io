@@ -17,7 +17,13 @@ var market_price_p = document.getElementById("market_price_p");
 var buy_dai_dex = document.getElementById("buy_dai_dex");
 var sell_dai_dex = document.getElementById("sell_dai_dex");
 var trading_amount = document.getElementById("trading_amount");
+var spread_center = document.getElementById("spread_center");
+var spread_cross0 = document.getElementById("spread_cross0");
+var spread_cross1 = document.getElementById("spread_cross1");
 
+var a_spread_center;
+var a_spread_cross0;
+var a_spread_cross1;
 var supply;
 var uniuni;
 var eth_in;
@@ -199,10 +205,11 @@ function get_sell_dai_info(val){
 		console.log(dai_in_univ1);
 		eth_dai_price = dai_in_univ1 / eth_in;
 		console.log(eth_dai_price);
-		//amount = Math.abs(1 - iprice/mprice) * eth_uniuni * eth_dai_price;
-		amount = slip * eth_uniuni * eth_dai_price;
-		//Divide for optimal amount
-		//amount = Math.sqrt(amount);
+		fraction_corrected = Math.abs(iprice / mprice - 1) - a_ufee / 100;
+		target_price = (iprice + mprice) / 2;
+		//amount = Math.abs(1 - Math.sqrt(1 + fraction_corrected)) * eth_uniuni * eth_dai_price;
+		amount = Math.abs(1 - Math.sqrt(target_price/mprice)) * eth_uniuni * eth_dai_price;
+		//amount = slip * eth_uniuni * eth_dai_price;
 		//Divide for buy half dai
 		half_amount = amount / 2;
 		console.log(amount);
@@ -211,6 +218,9 @@ function get_sell_dai_info(val){
 
 		assumption.innerHTML = String(amount_eth.toFixed(2)) 
 			+ " ETH (~" + String(amount.toFixed(0))+ " DAI)";
+
+		a_spread_center = 2 * (mprice - iprice) / (mprice + iprice) * 100;
+		spread_center.innerHTML = "Spread (Mkt - Intnl): " + a_spread_center.toFixed(2) + "%";
 
 		Promise.all([
 				get_buy_dai_info(half_amount),
@@ -229,8 +239,8 @@ function get_sell_dai_info(val){
 			internal_price_m.innerHTML = ipricem.toFixed(3) ;
 			internal_price_p.innerHTML = ipricep.toFixed(3) ;
 			buy_dai_dex.innerHTML = "buy " + String(half_amount.toFixed(0)) + " DAI"
-				+ " with ETH at " + String(a_buy_dai_dex) + "* and band";
-			sell_dai_dex.innerHTML = "unband and sell " + String(half_amount.toFixed(0)) 
+				+ " with ETH at " + String(a_buy_dai_dex) + "*";
+			sell_dai_dex.innerHTML = "sell " + String(half_amount.toFixed(0)) 
 				+ " DAI for ETH at " + String(a_sell_dai_dex) + "*";
 			trading_amount.innerHTML = half_amount.toFixed(0);
 			
@@ -250,13 +260,11 @@ function get_sell_dai_info(val){
 			description = String(amount_eth.toFixed(2)) + " ETH"
 			ufeem.innerHTML = "sell for " + description;
 			ufeep.innerHTML = "buy with " + description ;
-			if(iprice > mprice){
-			market_price_m.innerHTML = "";
-			ufeem.innerHTML = "" ;
-			}else{
-				market_price_p.innerHTML = "";
-				ufeep.innerHTML = "" ;
-			}
+		
+			a_spread_cross0 = 2 * (mpricep - ipricem) / (mpricep + ipricem) * 100;
+			a_spread_cross1 = 2 * (ipricep - mpricem) / (ipricep + mpricem) * 100;
+			spread_cross0.innerHTML = "MktBuy - Burn&Sell: " + a_spread_cross0.toFixed(2) + "%";
+			spread_cross1.innerHTML = "Buy&Mint - MktSell: " + a_spread_cross1.toFixed(2) + "%";
 
 		});
 	});

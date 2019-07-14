@@ -15,7 +15,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Lato:400,900" rel="stylesheet">
 
 		<!-- Bootstrap CSS File -->
-		<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../Solid/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 		<!-- Libraries CSS Files -->
 		<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -74,29 +74,41 @@
 	  ***************************************************************************************************************** -->
 	  <div id="headerwrap">
 		  <div class="col-xs-12">
-			  <p>Assumed trade amount: <span id = "trading_amount">__
+			  <p>Assumed trade amount: 
+			  <span id="trading_amount">__
 			  </span></p>
 		  </div>
 		  <div class="container">
 			  <div class="row">
+				  <div class="col-xs-2 col-xs-offset-5">
+					  <img src="img/cdai_small.png" class="img-responsive">
+				  </div>
+			  </div>
+		  </div>
+		  <!--end of container-->
+		  <div class="container">
+			  <div class="row">
 				  <div class="col-lg-8 col-lg-offset-2 himg">
-					  <h4>compound</h4>
-				  </div>
-
-				  <div class="col-xs-4">
-					  <h4 id="compound_price_m">__</h4>
-					  <p> burn and sell DAI for ETH at <span id = "sell_dai_dex">__</span>*</p>
-				  </div>
-
-				  <div class="col-xs-4">
-					  <h5 id="compound_price">__</h5>
-					  <h5> DAI/cDAI</h5>
-					  <img src="img/cdai_small.png" alt ="" width="60%" height="60%">
+					  <h4>Compound</h4>
 				  </div>
 				  
-				  <div class="col-xs-4">
+				  <div class="col-xs-12">
+					  <h5>
+						  <span id="compound_price">__</span>
+					   DAI/cDAI</h5>
+				  </div>
+
+				  <div class="col-xs-6">
+					  <h4>Burn&Sell</h4>
+					  <h4 id="compound_price_m">__</h4>
+					  <p>sell DAI for ETH at <span id = "sell_dai_dex">__</span>*</p>
+				  </div>
+
+				  
+				  <div class="col-xs-6">
+					  <h4>Buy&Mint</h4>
 					  <h4 id="compound_price_p">__</h4>
-					  <p> buy DAI with ETH at <span id = "buy_dai_dex">__</span>* and mint</p>
+					  <p> buy DAI with ETH at <span id = "buy_dai_dex">__</span>*</p>
 				  </div>
 				  
 
@@ -113,20 +125,24 @@
 
 
 
-				  <div class = "col-xs-4">
+				  <div class="col-xs-12">
+					  <h5>
+					  <span id="uniswap_price">__</span>
+					   DAI/cDAI</h5>
+				  </div>
+
+				  <div class = "col-xs-6">
+					  <h4 >Sell</h4>
 					  <h4 id="uniswap_price_m2">__</h4>
 					  <p><span id = "ufeem2"></span></p>
 					  <h4 id="uniswap_price_m">__</h4>
 					  <p><span id = "ufeem"></span></p>
 				  </div>
 				  
-				  <div class="col-xs-4">
-					  <h5 id="uniswap_price">__</h5>
-					  <h5> DAI/cDAI</h5>
-				  </div>
 
 
-				  <div class = "col-xs-4">
+				  <div class = "col-xs-6">
+					  <h4 >Buy</h4>
 					  <h4 id="uniswap_price_p2">__</h4>
 					  <p><span id = "ufeep2"></span></p>
 					  <h4 id="uniswap_price_p">__</h4>
@@ -138,6 +154,17 @@
 
 		  </div>
 		  <!-- /container -->
+		  
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-xs-12">
+					  <p id="spread_center">Spread</p>
+					  <h5 id="spread_cross0">__</h5>
+					  <h5 id="spread_cross1">__</h5>
+				  </div>
+			  </div>
+		  </div>
+		  <!--end of container-->
 	  </div>
 	  <!-- /headerwrap -->
 

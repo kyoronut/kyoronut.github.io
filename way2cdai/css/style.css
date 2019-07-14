@@ -38,23 +38,9 @@ p {
 	margin-top: 10px;
 }
 
-/*
-img {
-}
-*/
-/* mobile*/
-@media only screen and (max-width: 767px){
-  img{
+img{
 	height: auto;
 	max-width: 100%;
-  }
-}
-/* pc*/
-@media only screen and (min-width: 768px), print {
-  img{
-    width: 100px;
-    height: auto;
-  }
 }
 
 a {
