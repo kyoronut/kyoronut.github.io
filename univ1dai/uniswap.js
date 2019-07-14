@@ -205,17 +205,23 @@ function get_sell_dai_info(val){
 		console.log(dai_in_univ1);
 		eth_dai_price = dai_in_univ1 / eth_in;
 		console.log(eth_dai_price);
+		
+		a_spread_center = 2 * (mprice - iprice) / (mprice + iprice) * 100;
+		spread_center.innerHTML = "Spread (Mkt - Intnl): " + a_spread_center.toFixed(2) + "%";
+
 		var c_factor;
 		if(iprice >= mprice){
 			c_factor = 1 - a_ufee / 100 ;
 		}else{
 			c_factor = 1 + a_ufee / 100 ;
 		}
-		//target_price = (iprice + mprice) / 2;
 		target_price = iprice * c_factor;
-		//amount = Math.abs(1 - Math.sqrt(1 + fraction_corrected)) * eth_uniuni * eth_dai_price;
-		amount = Math.abs(1 - Math.sqrt(target_price/mprice)) * eth_uniuni * eth_dai_price;
-		//amount = slip * eth_uniuni * eth_dai_price;
+		if(Math.abs(a_spread_center) < (a_ufee + slip * 100)){
+			amount = slip * eth_uniuni * eth_dai_price;
+		}else{
+			amount = Math.abs(1 - Math.sqrt(target_price/mprice)) * eth_uniuni * eth_dai_price;
+		}
+
 		//Divide for buy half dai
 		half_amount = amount / 2;
 		console.log(amount);
@@ -225,8 +231,6 @@ function get_sell_dai_info(val){
 		assumption.innerHTML = String(amount_eth.toFixed(2)) 
 			+ " ETH (~" + String(amount.toFixed(0))+ " DAI)";
 
-		a_spread_center = 2 * (mprice - iprice) / (mprice + iprice) * 100;
-		spread_center.innerHTML = "Spread (Mkt - Intnl): " + a_spread_center.toFixed(2) + "%";
 
 		Promise.all([
 				get_buy_dai_info(half_amount),

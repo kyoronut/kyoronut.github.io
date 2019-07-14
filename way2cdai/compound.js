@@ -222,22 +222,26 @@ function get_sell_dai_info(val){
 
 			uprice = 1 * (data[1] * data[2] / data[0] / data[3]); 
 		uniswap_price.innerHTML = uprice.toFixed(pfix);
-		//amount = Math.abs(1 - uprice/Number(cprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
-		//amount = Math.sqrt(amount);
-		//amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
+		
+		a_spread_center = 2 * (uprice - cprice) / (uprice + cprice) * 100;
+		spread_center.innerHTML = "Spread (Uni - Comp): " + a_spread_center.toFixed(2) + "%";
+
 		if(cprice >= uprice){
 			c_factor = 1 - a_ufee / 100 ;
 		}else{
 			c_factor = 1 + a_ufee / 100 ;
 		}
-		//target_price = (cprice + uprice) / 2;
 		target_price = cprice * c_factor;
-		amount = Math.abs(1 - Math.sqrt(target_price/uprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
+		if(Math.abs(a_spread_center) < (a_ufee + slip * 100)){
+			amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
+		}
+		else{
+			amount = Math.abs(1 - Math.sqrt(target_price/uprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
+		}
+
 		amount_eth = amount / a_eth_dai_price;
 		trading_amount.innerHTML = String(amount.toFixed(0))
 			+ " DAI (~" + String(amount_eth.toFixed(2)) + " ETH)";
-		a_spread_center = 2 * (uprice - cprice) / (uprice + cprice) * 100;
-		spread_center.innerHTML = "Spread (Uni - Comp): " + a_spread_center.toFixed(2) + "%";
 
 		Promise.all([get_buy_dai_info(amount), get_sell_dai_info(amount)])
 			.then(function(data2){
