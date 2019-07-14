@@ -205,8 +205,14 @@ function get_sell_dai_info(val){
 		console.log(dai_in_univ1);
 		eth_dai_price = dai_in_univ1 / eth_in;
 		console.log(eth_dai_price);
-		fraction_corrected = Math.abs(iprice / mprice - 1) - a_ufee / 100;
-		target_price = (iprice + mprice) / 2;
+		var c_factor;
+		if(iprice >= mprice){
+			c_factor = 1 - a_ufee / 100 ;
+		}else{
+			c_factor = 1 + a_ufee / 100 ;
+		}
+		//target_price = (iprice + mprice) / 2;
+		target_price = iprice * c_factor;
 		//amount = Math.abs(1 - Math.sqrt(1 + fraction_corrected)) * eth_uniuni * eth_dai_price;
 		amount = Math.abs(1 - Math.sqrt(target_price/mprice)) * eth_uniuni * eth_dai_price;
 		//amount = slip * eth_uniuni * eth_dai_price;

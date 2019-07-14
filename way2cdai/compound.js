@@ -225,7 +225,13 @@ function get_sell_dai_info(val){
 		//amount = Math.abs(1 - uprice/Number(cprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
 		//amount = Math.sqrt(amount);
 		//amount = slip * a_eth_in_cdai_pool * a_eth_dai_price;
-		target_price = (cprice + uprice) / 2;
+		if(cprice >= uprice){
+			c_factor = 1 - a_ufee / 100 ;
+		}else{
+			c_factor = 1 + a_ufee / 100 ;
+		}
+		//target_price = (cprice + uprice) / 2;
+		target_price = cprice * c_factor;
 		amount = Math.abs(1 - Math.sqrt(target_price/uprice)) * a_eth_in_cdai_pool * a_eth_dai_price;
 		amount_eth = amount / a_eth_dai_price;
 		trading_amount.innerHTML = String(amount.toFixed(0))
