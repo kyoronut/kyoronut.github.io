@@ -248,10 +248,12 @@ function get_sell_dai_info(val){
 			var ipricem = (0.5 + 0.5 * sell_dai_spread) * iprice;
 			internal_price_m.innerHTML = ipricem.toFixed(3) ;
 			internal_price_p.innerHTML = ipricep.toFixed(3) ;
-			buy_dai_dex.innerHTML = "buy " + String(half_amount.toFixed(0)) + " DAI"
+			//buy_dai_dex.innerHTML = "buy " + String(half_amount.toFixed(0)) + " DAI"
+			buy_dai_dex.innerHTML = "buy DAI"
 				+ " with ETH at " + String(a_buy_dai_dex) + "*";
-			sell_dai_dex.innerHTML = "sell " + String(half_amount.toFixed(0)) 
-				+ " DAI for ETH at " + String(a_sell_dai_dex) + "*";
+			//sell_dai_dex.innerHTML = "sell " + String(half_amount.toFixed(0)) 
+			sell_dai_dex.innerHTML = "sell "  
+				+ "DAI for ETH at " + String(a_sell_dai_dex) + "*";
 			trading_amount.innerHTML = half_amount.toFixed(0);
 			
 			//uniswap price calculation from https://docs.uniswap.io/frontend-integration/swap
