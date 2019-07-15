@@ -3,6 +3,7 @@ const am = [0.1, 1, 3, 10, 30, 100];
 var amount = document.getElementById("amount");
 var buy = document.getElementById("buy");
 var sell = document.getElementById("sell");
+document.getElementById("token").innerHTML = "DAI";
 
 function get_buy_eth_info(val){
 	console.log(val);
