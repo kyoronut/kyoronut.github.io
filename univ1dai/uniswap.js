@@ -1,5 +1,6 @@
 const slip = 0.001;
 var assumption = document.getElementById("assumption");
+var assumption_half = document.getElementById("assumption_half");
 var univ1dai_tot_supply = document.getElementById("univ1dai_tot_supply");
 var univ1_in_univ1= document.getElementById("univ1_in_univ1");
 var eth_in_univ1 = document.getElementById("eth_in_univ1");
@@ -223,13 +224,18 @@ function get_sell_dai_info(val){
 		}
 
 		//Divide for buy half dai
-		half_amount = amount / 2;
+		half_amount = Number(amount / 2);
 		console.log(amount);
 		amount_eth = amount / eth_dai_price;
+		half_amount_eth = Number(amount_eth / 2);
+		console.log(half_amount);
+		console.log(half_amount_eth);
 
 
 		assumption.innerHTML = String(amount_eth.toFixed(2)) 
 			+ " ETH (~" + String(amount.toFixed(0))+ " DAI)";
+		assumption_half.innerHTML = String(half_amount_eth.toFixed(2)) 
+			+ " ETH (~" + String(half_amount.toFixed(0))+ " DAI)";
 
 
 		Promise.all([
