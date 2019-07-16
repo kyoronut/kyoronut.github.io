@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>UNI-V1:DAI info</title>
+		<title>wbtcmg</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 		<meta content="" name="keywords">
 		<meta content="" name="description">
 
 		<!-- Favicons -->
-		<link href="img/univ.png" rel="icon">
-		<link href="img/univ.png" rel="apple-touch-icon">
+		<link href="img/wbtc.png" rel="icon">
+		<link href="img/wbtc.png" rel="apple-touch-icon">
 
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Lato:400,900" rel="stylesheet">
@@ -45,7 +45,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">UNI-V1:DAI info</a>
+					<a class="navbar-brand" href="index.html">wbtcmg</a>
 				</div>
 				<div class="navbar-collapse collapse navbar-right">
 					<ul class="nav navbar-nav">
@@ -78,92 +78,47 @@
 			  <div class="row">
 				  <div class="col-xs-12">
 					  <h5>This page is developed by kyoronut to provide DeFi community with
-						  better understanding of primary price and secondary market price of UNI-V1:DAI.
+						  better understanding of WBTC price.
 						  All information presented here is provided "as is"
 						  and there are circumstances beyond my control
 						  that may cause this page to display inaccurate price information.
 						  You agree that your use of any of the information
 						  provided is at your own risk.</h5>
-					  <p>Assumed trade amount: <span id = "assumption"></span></p>
-					  <p>half: <span id = "assumption_half"></span></p>
-					  </div>
-				  <div class="col-xs-2 col-xs-offset-5">
-					  <img src="img/univ.png"  class="img-responsive">
+					  <img src="img/wbtc.png" alt="" width="20%" height="20%">
 				  </div>
-				  <div class="col-xs-12">
-					  <h4>UNI-V1:DAI Internal price</h4>
-					  <h5>
-						  <span id="internal_price">__</span>
-						  ETH = (b) x 2 / (a)
-					  </h5>
-				  </div>
-
-				  <div class="col-xs-6">
-					  <h4 id="burn">Burn & Sell half</h4>
-					  <h2 id="internal_price_m">__</h2>
-					  <p id = "sell_dai_dex">_</p>
-				  </div>
-
-
-				  <div class="col-xs-6">
-					  <h4 id="mint">Buy half & Mint</h4>
-					  <h2 id="internal_price_p">__</h2>
-					  <p id = "buy_dai_dex">_</p>
-				  </div>
-				   
-				  <div class="col-xs-12">
-					   <p>*Best rate found from DEXes: Uniswap, Bancor, Kyber, RadarRelay.
-					   Powered by DEX.AG API.</p>
-					   <p hidden id = "trading_amount"></p>
-				   </div>
-				  
-
-
 			  </div>
-
-		  </div>
-		  <!--end of container-->
-
-
-		  <div class="container">
+			  <div class = "row centered">
+				  <div class="col-xs-12">
+						  <h4>WBTC trade price in 
+							  <span id="token">USDC</span>
+						  </h4>
+						  <a href="index.html"class="btn btn-theme" >DAI</a>
+						  <a href="usdc.html"class="btn btn-theme" >USDC</a>
+						  <a href="eth.html"class="btn btn-theme" >ETH</a>
+					  <h5>*Best rate found from DEXes: Uniswap, Bancor, Kyber, RadarRelay.
+						  Powered by DEX.AG API.</h5>
+					  <p hidden id = "trading_amount"></p>
+				  </div>
+		   </div>
 			  <div class="row">
-				  <div class="col-xs-12">
-					  <h4>UNI-V1:DAI Market price</h4>
-				  </div>
-				  
-				  <div class="col-xs-12">
-					  <h5>
-					  <span id="market_price">__</span>
-					  <span> ETH</span>
-					  <span> = (bb) / (aa)</span>
-					  </h5>
-				  </div>
-
-				  <div class="col-xs-6">
+				  <div class="col-xs-4">
 					  <h4>Sell</h4>
-					  <h2 id="market_price_m">__</h2>
-					  <p hidden ><span id = "ufeem"></span></p>
+					  <h5><br></h5>
+					  <span id = "sell"></span>
 				  </div>
-
-
-				  <div class="col-xs-6">
+				  <div class="col-xs-4">
+					  <h4>Amount</h4>
+					  <h5>(spread)</h5>
+					  <span id = "amount"></span>
+				  </div>
+				  <div class="col-xs-4">
 					  <h4>Buy</h4>
-					  <h2 id="market_price_p">__</h2>
-					  <p hidden><span id = "ufeep"></span></p>
+					  <h5><br></h5>
+					  <span id = "buy"></span>
 				  </div>
 
 			  </div>
-		  </div>
-		  <!--end of container-->
 
-		  <div class="container">
-			  <div class="row">
-				  <div class="col-xs-12">
-					  <p id="spread_center">Spread</p>
-					  <h5 id="spread_cross0">__</h5>
-					  <h5 id="spread_cross1">__</h5>
-				  </div>
-			  </div>
 		  </div>
 		  <!--end of container-->
 
@@ -174,57 +129,6 @@
 	   SERVICE LOGOS
 	   ***************************************************************************************************************** -->
 	   <div id="service">
-		   <div class="container">
-			   <div class="row centered">
-
-				   <div class="col-xs-6">
-					   <h4>(a)</h4>
-					   <p>UNI-V1:DAI total supply</p>
-					   <p id="univ1dai_tot_supply"></p>
-					   <br><br>
-				   </div>
-
-				   <div class="col-xs-6">
-					   <h4>(b)</h4>
-					   <p>ETH in UNI-V1:DAI contract</p>
-					   <p id="eth_in_univ1"></p>
-					   <br><br>
-				   </div>
-
-			   </div>
-		   </div>
-
-		   <div class="container">
-			   <div class="row centered">
-				   <div class="col-xs-6">
-					   <h4>(aa)</h4>
-					   <p>UNI-V1:DAI in UNI-V1:(UNI-V1:DAI) contract</p>
-					   <p id="univ1_in_univ1"></p>
-					   <br><br>
-				   </div>
-
-				   <div class="col-xs-6">
-					   <h4>(bb)</h4>
-					   <p>ETH in UNI-V1:(UNI-V1:DAI) contract</p>
-					   <p id="eth_in_univ1univ1"></p>
-					   <br><br>
-				   </div>
-
-			   </div>
-		   </div>
-
-		   <div class="container">
-			   <div class="row centered">
-				   <div class="col-xs-12">
-					   <a href="https://etherscan.io/address/0x09cabec1ead1c0ba254b09efb3ee13841712be14/"class="btn btn-theme">UNI-V1:DAI contract</a>
-				   </div>
-
-				   <div class="col-xs-12">
-					   <a href="https://etherscan.io/address/0x601c32e0580d3aef9437db52d09f5a5d7e60ec22/"class="btn btn-theme" >UNI-V1:(UNI-V1:DAI) contract</a>
-				   </div>
-
-			   </div>
-		   </div>
 	   </div>
 
 
@@ -238,7 +142,7 @@
 						<h4>Creator: kyoronut</h4>
 						<div class="hline-w"></div>
 						<p>
-						<a href="https://twitter.com/kyoronut"><i class="fa fa-twitter"></i></a>
+						<a href="https://twitter.com/kyoronut"><i class="fa fa-twitter fa-2x"></i></a>
 						</p>
 					</div>
 				</div>
@@ -280,7 +184,7 @@
 
 		<!-- Template Main Javascript File -->
 		<script src="js/main.js"></script>
-		<script src="uniswap.js"></script>
+		<script src="ethmg.js"></script>
 
 	</body>
 </html>
