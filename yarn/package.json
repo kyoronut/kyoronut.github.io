@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ethereum-dex-prices-service": "^0.1.1"
+  }
+}
