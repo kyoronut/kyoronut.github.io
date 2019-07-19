@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>wbtcmg</title>
+		<title>DexDetour</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 		<meta content="" name="keywords">
 		<meta content="" name="description">
 
 		<!-- Favicons -->
-		<link href="img/wbtc.png" rel="icon">
-		<link href="img/wbtc.png" rel="apple-touch-icon">
+		<link href="img/dexdetour.png" rel="icon">
+		<link href="img/dexdetour.png" rel="apple-touch-icon">
 
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,700,900|Lato:400,900" rel="stylesheet">
@@ -45,7 +45,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">wbtcmg</a>
+					<a class="navbar-brand" href="index.html">DexDetour</a>
 				</div>
 				<div class="navbar-collapse collapse navbar-right">
 					<ul class="nav navbar-nav">
@@ -56,15 +56,15 @@
 						<li><a href="../ethmg/index.html">ethmg</a></li>
 						<li><a href="../wbtcmg/index.html">wbtcmg</a></li>
 						<!--
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="blog.html">BLOG</a></li>
-								<li><a href="single-post.html">SINGLE POST</a></li>
-								<li><a href="portfolio.html">PORTFOLIO</a></li>
-								<li><a href="single-project.html">SINGLE PROJECT</a></li>
-							</ul>
-						</li>
+		  <li class="dropdown">
+		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		  <li><a href="blog.html">BLOG</a></li>
+		  <li><a href="single-post.html">SINGLE POST</a></li>
+		  <li><a href="portfolio.html">PORTFOLIO</a></li>
+		  <li><a href="single-project.html">SINGLE PROJECT</a></li>
+		  </ul>
+		  </li>
 						-->
 					</ul>
 				</div>
@@ -79,49 +79,100 @@
 			  <div class="row">
 				  <div class="col-xs-12">
 					  <h5>This page is developed by kyoronut to provide DeFi community with
-						  better understanding of WBTC price.
+						  better understanding of prices of tokens in DEXes.
 						  All information presented here is provided "as is"
 						  and there are circumstances beyond my control
 						  that may cause this page to display inaccurate price information.
 						  You agree that your use of any of the information
 						  provided is at your own risk.</h5>
-					  <img src="img/wbtc.png" alt="" width="20%" height="20%">
+					  <img src="img/dexdetour.png" alt="" width="20%" height="20%">
 				  </div>
-			  </div>
-			  <div class = "row centered">
-				  <div class="col-xs-12">
-						  <h4>WBTC trade price in 
-							  <span id="token">DAI</span>
-						  </h4>
-						  <a href="index.html"class="btn btn-theme" >DAI</a>
-						  <a href="usdc.html"class="btn btn-theme" >USDC</a>
-						  <a href="eth.html"class="btn btn-theme" >ETH</a>
-					  <h5>*Best rate found from DEXes: Uniswap, Bancor, Kyber, RadarRelay.
-						  Powered by DEX.AG API.</h5>
-					  <p hidden id = "trading_amount"></p>
-				  </div>
-		   </div>
-			  <div class="row">
-				  <div class="col-xs-4">
-					  <h4>Sell</h4>
-					  <h5><br></h5>
-					  <span id = "sell"></span>
-				  </div>
-				  <div class="col-xs-4">
-					  <h4>Amount</h4>
-					  <h5>(spread)</h5>
-					  <span id = "amount"></span>
-				  </div>
-				  <div class="col-xs-4">
-					  <h4>Buy</h4>
-					  <h5><br></h5>
-					  <span id = "buy"></span>
-				  </div>
-
 			  </div>
 
 		  </div>
 		  <!--end of container-->
+		  <div class="container">
+			  <form name="mainForm">
+				  <div class="row">
+					  <div class="col-xs-4">
+						  <h5>from</h5>
+						  <h4>
+							  <select name="from_token">
+								  <option value="DAI">DAI</option>
+								  <option value="ETH">ETH</option>
+								  <option value="USDC">USDC</option>
+								  <option value="WBTC">WBTC</option>
+							  </select>
+						  </h4>
+					  </div>
+					  <div class="col-xs-4">
+						  <h5>medium</h5>
+						  <h4>
+							  <select name="med_token">
+								  <option value="ETH">ETH</option>
+								  <option value="DAI">DAI</option>
+								  <option value="USDC">USDC</option>
+								  <option value="WBTC">WBTC</option>
+							  </select>
+						  </h4>
+					  </div>
+					  <div class="col-xs-4">
+						  <h5>to</h5>
+						  <h4>
+							  <select name="to_token">
+								  <option value="WBTC">WBTC</option>
+								  <option value="ETH">ETH</option>
+								  <option value="DAI">DAI</option>
+								  <option value="USDC">USDC</option>
+							  </select>
+						  </h4>
+					  </div>
+					  <div class="col-xs-12">
+						  <h4>
+							  <select name="fromOrTo">
+								  <option value="from">from amount</option>
+								  <option value="to">to amount</option>
+							  </select>
+						  </h4>
+						  <p>
+						  <input type="number" name="amount" placeholder="amount"></input>
+						  </p>
+						  <div class="btn btn-default" id="search" onclick="search_price()">
+							  Search trade
+						  </div>
+						  <h5 id="caution"></h5>
+						  <p id="direct_price_title"></p>
+						  <h5> <span id="direct_price"></span></span></h5>
+						  <h5> <span id="direct_amount"></span></span></h5>
+
+						  <h2> <font id="ratio_title" size="3"></font><font id="ratio" color="white"></font></h2>
+
+						  <p id="detour_price_title"></p>
+						  <h5> <span id="detour_price"></span></span></h5>
+						  <h5> <span id="detour_amount"></span></span></h5>
+					  </div>
+					  <div class="col-xs-6">
+						  <p id="to_med_price_title"></p>
+						  <h5 id="to_med_price"></h5>
+					  </div>
+					  <div class="col-xs-6">
+						  <p id="from_med_price_title"></p>
+						  <h5 id="from_med_price"></h5>
+					  </div>
+					  <div class="col-xs-12">
+						  <h5 id="med_amount"></h5>
+					  </div>
+					  <div class="col-xs-12">
+						  <p>
+						  check <a href="https://docs.dex.ag/api">here</a>
+						  for sourced DEXes' list
+						  </p>
+					  </div>
+				  </div>
+				  <!-- /row -->
+			  </form>
+		  </div>
+		  <!-- /container -->
 
 
 	  </div>
@@ -185,7 +236,7 @@
 
 		<!-- Template Main Javascript File -->
 		<script src="js/main.js"></script>
-		<script src="ethmg.js"></script>
+		<script src="dexdetour.js"></script>
 
 	</body>
 </html>
