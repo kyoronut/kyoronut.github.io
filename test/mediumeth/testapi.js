@@ -74,6 +74,7 @@ function search_price(){
 	var amount = form.amount.value;
 	var from_token = form.from_token.value;
 	var to_token = form.to_token.value;
+	var med_token = form.med_token.value;
 	var ratio;
 	var direct_price;
 	var direct_amount;
@@ -104,8 +105,11 @@ function search_price(){
 	document.getElementById("ratio").innerHTML ="";
 	document.getElementById("eth_amount").innerHTML ="";
 
-	if(from_token == to_token){
-		document.getElementById("caution").innerHTML = "Can't be from = to .";
+	if(from_token == med_token
+			|| med_token == to_token
+			|| to_token == from_token
+			){
+		document.getElementById("caution").innerHTML = "Same token.";
 		return -1;
 	}
 	else if(amount == ""){
@@ -135,22 +139,22 @@ function search_price(){
 		});
 		if(order_type=="from"){
 			med_from[0] = from_token;
-			med_to[0] = "ETH";
+			med_to[0] = med_token;
 			med_from[1] = med_to[0];
 			med_to[1] = to_token;
-			nume_token[0] = "ETH";
+			nume_token[0] = med_token;
 			deno_token[0] = from_token;
 			nume_token[1] = to_token;
-			deno_token[1] = "ETH";
+			deno_token[1] = med_token;
 		}
 		else{
-			med_from[0] = "ETH";
+			med_from[0] = med_token;
 			med_to[0] = to_token;
 			med_from[1] = from_token;
-			med_to[1] = "ETH";
+			med_to[1] = med_token;
 			nume_token[0] = from_token;
-			deno_token[0] = "ETH";
-			nume_token[1] = "ETH";
+			deno_token[0] = med_token;
+			nume_token[1] = med_token;
 			deno_token[1] = to_token;
 		}
 
@@ -179,7 +183,7 @@ function search_price(){
 			console.log(med_price[2].toExponential(3));
 			med_amount = med_price[2] * amount;
 		}).then(()=>{
-			document.getElementById("med_price_title").innerHTML = from_token+"-ETH-"+to_token+" path";
+			document.getElementById("med_price_title").innerHTML = from_token+"-"+med_token+"-"+to_token+" path";
 			document.getElementById("med_price").innerHTML += "Price: ";
 			document.getElementById("med_price").innerHTML += med_price[2].toExponential(3);
 			document.getElementById("med_amount").innerHTML += inverse + " amount: ";
@@ -189,7 +193,7 @@ function search_price(){
 			document.getElementById("to_eth_price_title").innerHTML += " at "+med_dex[0];
 			document.getElementById("to_eth_price").innerHTML += "Price: ";
 			document.getElementById("to_eth_price").innerHTML += med_price[0].toExponential(3);
-			document.getElementById("eth_amount").innerHTML +="Mediator: "+eth_amount.toExponential(3)+" ETH";
+			document.getElementById("eth_amount").innerHTML +="Mediator: "+eth_amount.toExponential(3)+" "+med_token;
 
 			document.getElementById("from_eth_price_title").innerHTML =med_from[1]+"-"+med_to[1];
 			document.getElementById("from_eth_price_title").innerHTML += " at "+med_dex[1];
