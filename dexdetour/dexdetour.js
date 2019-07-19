@@ -72,6 +72,10 @@ function search_price(){
 		document.getElementById("caution").innerHTML = "Enter amount .";
 		return -1;
 	}
+	else if(amount < 0){
+		document.getElementById("caution").innerHTML = "Invalid amount";
+		return -1;
+	}
 	else{
 		document.getElementById("caution").innerHTML = "";
 		get_price(from_token, to_token, order_type, amount).then((result)=>{
