@@ -1,5 +1,5 @@
-const n = 8;
-const am = [0.003, 0.01, 0.03, 0.1, 0.3, 1, 3, 10];
+const n = 5;
+const am = [0.01, 0.1, 0.3, 1, 3];
 var amount = document.getElementById("amount");
 var buy = document.getElementById("buy");
 var sell = document.getElementById("sell");
