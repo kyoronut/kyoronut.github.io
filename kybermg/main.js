@@ -63,14 +63,18 @@ Promise.all(list)
 			var digit;
 			if(buy_price > 100){
 				buy.innerHTML += "<h4>" + String(Number(data[i][0]).toFixed(1)) + "</h4>"
-					+ "<h5>" + String(data[i][1]) + "</h5>";
+					//+ "<h5>" + String(data[i][1]) + "</h5>";
+					+ "<h5><br></h5>";
 				sell.innerHTML += "<h4>" + String(Number(data[i + n][0]).toFixed(1)) + "</h4>"
-					+ "<h5>" + String(data[i + n][1]) + "</h5>";
+					//+ "<h5>" + String(data[i + n][1]) + "</h5>";
+					+ "<h5><br></h5>";
 			}else{
 				buy.innerHTML += "<h4>" + String(Number(data[i][0]).toExponential(3)) + "</h4>"
-					+ "<h5>" + String(data[i][1]) + "</h5>";
+					//+ "<h5>" + String(data[i][1]) + "</h5>";
+					+ "<h5><br></h5>";
 				sell.innerHTML += "<h4>" + String(Number(data[i + n][0]).toExponential(3)) + "</h4>"
-					+ "<h5>" + String(data[i + n][1]) + "</h5>";
+					//+ "<h5>" + String(data[i + n][1]) + "</h5>";
+					+ "<h5><br></h5>";
 			}
 
 			amount.innerHTML += "<h4>" + String(am[i]) + "</h4>"
