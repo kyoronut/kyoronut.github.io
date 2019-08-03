@@ -1,5 +1,5 @@
-const n = 5;
-const am = [10, 100, 1000, 3000, 10000];
+const n = 7;
+const am = [10, 30, 100, 300, 1000, 3000, 10000];
 var amount = document.getElementById("amount");
 var buy = document.getElementById("buy");
 var sell = document.getElementById("sell");
@@ -55,9 +55,23 @@ async function search_price(){
 	token = form.token.value;
 	var list = new Array(2*n);
 	var data = new Array(2*n);
+	var prelist = new Array(2*4);
+	for(var i=0; i<4; i++){
+		prelist[i] = get_buy_dai_info(am[i]);
+		prelist[i + 4] = get_sell_dai_info(am[i]);
+	}
+	const predata = await Promise.all(prelist);
+	for(var i=0; i<4; i++){
+		data[i] = predata[i];
+		data[i + n] = predata[i + 4];
+	}
+
 	for(var i = 0; i < n; i++){
-		data[i] = await get_buy_dai_info(am[i]);
-		data[i + n] = await get_sell_dai_info(am[i]);
+		if(i >= 4){
+			var tmpdata = await Promise.all([get_buy_dai_info(am[i]), get_sell_dai_info(am[i])])
+			data[i] = tmpdata[0];
+			data[i + n] = tmpdata[1];
+		}
 		//var buy_price = Number(data[i][0]);
 		//var sell_price = Number(data[i + n][0]);
 		var sell_price = 1/ Number(data[i][0]);
