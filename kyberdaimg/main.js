@@ -52,6 +52,7 @@ async function search_price(){
 	buy.innerHTML = "";
 	sell.innerHTML = "";
 	amount.innerHTML = "";
+	document.getElementById("medium0").innerHTML = "";
 	token = form.token.value;
 	var list = new Array(2*n);
 	var data = new Array(2*n);
@@ -65,6 +66,11 @@ async function search_price(){
 		data[i] = predata[i];
 		data[i + n] = predata[i + 4];
 	}
+	var sell_price0 = 1/ Number(data[0][0]);
+	var buy_price0 = 1/ Number(data[0 + n][0]);
+	var medium0 = (buy_price0 + sell_price0) / 2;
+	document.getElementById("medium0").innerHTML = "<h3>" + String(medium0.toExponential(3)) + "</h3>"
+		+"<h5>(10 DAI center price)</h5> "; 
 
 	for(var i = 0; i < n; i++){
 		if(i >= 4){
@@ -79,15 +85,17 @@ async function search_price(){
 		var spread = buy_price - sell_price;
 		var medium = (buy_price + sell_price) / 2;
 		var spread_p = spread / medium * 100;
+		var pslip = (buy_price - medium0) / medium0 * 100;
+		var mslip = (sell_price - medium0) / medium0 * 100;
 		var digit;
 		//buy.innerHTML += "<h4>" + String(Number(data[i][0]).toExponential(3)) + "</h4>"
 		buy.innerHTML += "<h4>" + String(buy_price.toExponential(3)) + "</h4>"
 			//+ "<h5>" + String(data[i][1]) + "</h5>";
-			+ "<h5><br></h5>";
+			+ "<h5>+" +String(pslip.toFixed(2))+"%</h5>";
 		//sell.innerHTML += "<h4>" + String(Number(data[i + n][0]).toExponential(3)) + "</h4>"
 		sell.innerHTML += "<h4>" + String(sell_price.toExponential(3)) + "</h4>"
 			//+ "<h5>" + String(data[i + n][1]) + "</h5>";
-			+ "<h5><br></h5>";
+			+ "<h5>" +String(mslip.toFixed(2))+"%</h5>";
 
 		amount.innerHTML += "<h4>" + String(am[i]) + "</h4>"
 			+ "<h5>" + String(Number(spread_p).toFixed(2))+"%</h5>";
