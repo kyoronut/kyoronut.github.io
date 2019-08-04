@@ -136,3 +136,8 @@ $("#box").keypress(e=>{
 		$("#search").click();
 	}
 })
+$("#box").focusin(e =>{
+	var tmp = form.token.value;
+	console.log(tmp);
+	form.token.value = "";
+});
