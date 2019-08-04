@@ -75,10 +75,13 @@
 				  <div class="col-xs-12">
 					  <form name="mainForm">
 						  <h4> 
-							  <input type="text" size="5" inputmode="verbatim" name="token" placeholder="ETH">
+							  <input type="text" size="5" inputmode="verbatim" 
+							  name="token" placeholder="ETH" list="kyber_tokens"
+							  id="box">
 							  trade price in DAI
 							  at Kyber
 						  </h4>
+						  <datalist id="kyber_tokens"></datalist>
 						  <div class="btn btn-default" id="search" onclick="search_price()">
 							  Search price
 						  </div>

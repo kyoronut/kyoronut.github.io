@@ -5,6 +5,7 @@ var buy = document.getElementById("buy");
 var sell = document.getElementById("sell");
 var form = document.forms.mainForm;
 var token;
+const kyber_tokens = [];
 
 async function get_buy_dai_info(val){
 	console.log(val);
@@ -100,6 +101,38 @@ async function search_price(){
 		amount.innerHTML += "<h4>" + String(am[i]) + "</h4>"
 			+ "<h5>" + String(Number(spread_p).toFixed(2))+"%</h5>";
 	}
-
-
 }
+
+async function get_tokens(){
+	return new Promise(function(resolve){
+		$.ajax({
+			url:"https://api.kyber.network/currencies",
+			dataType:"json",
+		})
+
+		.done((data)=>{
+			console.log(data);
+			data.data.forEach(idata=>{
+			kyber_tokens.push(idata.symbol);
+			});
+			//console.log(kyber_tokens)
+
+				resolve(kyber_tokens);
+		})
+		.fail((data)=>{console.log(data.responceText);})
+			.always((data)=>{console.log(data);});
+	})
+};
+
+$(get_tokens().then(data => {
+	data.forEach(symbol =>{
+		document.getElementById("kyber_tokens").innerHTML+= '<option value="'+ symbol + '"></option>';
+		//console.log(symbol);
+	})
+}));
+
+$("#box").keypress(e=>{
+	if(e.which == 13){
+		$("#search").click();
+	}
+})
