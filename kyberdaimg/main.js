@@ -15,7 +15,7 @@ var token_sell_in_eth;
 var token_in_eth;
 const kyber_tokens = [];
 const dai_contract = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359";
-const usdc_contract = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
+//const usdc_contract = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
 var dai_in_eth;
 var dai_buy_in_eth;
 var dai_sell_in_eth;
