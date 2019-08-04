@@ -112,12 +112,13 @@ async function get_tokens(){
 
 		.done((data)=>{
 			console.log(data);
-			data.data.forEach(idata=>{
-			kyber_tokens.push(idata.symbol);
-			});
+			//data.data.forEach(idata=>{
+			//kyber_tokens.push(idata.symbol);
+			//});
 			//console.log(kyber_tokens)
 
-				resolve(kyber_tokens);
+			//resolve(kyber_tokens);
+			resolve(data);
 		})
 		.fail((data)=>{console.log(data.responceText);})
 			.always((data)=>{console.log(data);});
@@ -125,8 +126,9 @@ async function get_tokens(){
 };
 
 $(get_tokens().then(data => {
-	data.forEach(symbol =>{
-		document.getElementById("kyber_tokens").innerHTML+= '<option value="'+ symbol + '"></option>';
+	data.data.forEach(idata =>{
+		document.getElementById("kyber_tokens").innerHTML+= '<option value="'+ idata.symbol
+			+ '">'+ idata.name + '('+ idata.symbol +')</option>';
 		//console.log(symbol);
 	})
 }));
