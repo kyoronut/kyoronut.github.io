@@ -127,9 +127,11 @@ async function get_tokens(){
 
 $(get_tokens().then(data => {
 	data.data.forEach(idata =>{
-		document.getElementById("kyber_tokens").innerHTML+= '<option value="'+ idata.symbol
-			+ '" label="'+ idata.name + '('+ idata.symbol +')"></option>';
-		//console.log(symbol);
+		if(idata.symbol != "WETH"
+				&& idata.symbol != "DAI" ){
+			document.getElementById("kyber_tokens").innerHTML+= '<option value="'+ idata.symbol
+				+ '" label="'+ idata.name + '('+ idata.symbol +')"></option>';
+		}
 	})
 }));
 
