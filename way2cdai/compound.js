@@ -75,7 +75,7 @@ function plotres(response, prefix) {
 function get_price(){
 	return new Promise(function(resolve){
 		$.ajax({
-			url:"https://api.stage.compound.finance/api/v2/ctoken",
+			url:"https://api.compound.finance/api/v2/ctoken",
 			dataType:"json",
 		})
 		.done((data)=>{console.log(data);
