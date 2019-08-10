@@ -249,10 +249,8 @@ function get_sell_dai_info(val){
 				var a_buy_dai_dex = data2[0][1];
 				var sell_dai_price = data2[1][0];
 				var a_sell_dai_dex = data2[1][1];
-			        var d_eth_dai_price = await 1. / ((data2[0][0] + data2[1][0]) * 0.5);
-			console.log(d_eth_dai_price);
-				cpricep = buy_dai_price * d_eth_dai_price * cprice;//(dai/eth)(eth/dai)(dai/cdai)
-				cpricem = sell_dai_price * d_eth_dai_price * cprice;
+				cpricep = buy_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
+				cpricem = sell_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
 				compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
 				compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
 				buy_dai_dex.innerHTML = String(a_buy_dai_dex);
