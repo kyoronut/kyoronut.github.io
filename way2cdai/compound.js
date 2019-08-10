@@ -249,6 +249,7 @@ function get_sell_dai_info(val){
 				var a_buy_dai_dex = data2[0][1];
 				var sell_dai_price = data2[1][0];
 				var a_sell_dai_dex = data2[1][1];
+			console.log(1 / ((buy_dai_price + sell_dai_price) * 0.5));
 				cpricep = buy_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
 				cpricem = sell_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
 				compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
