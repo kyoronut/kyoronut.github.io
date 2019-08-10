@@ -245,13 +245,13 @@ function get_sell_dai_info(val){
 
 		Promise.all([get_buy_dai_info(amount), get_sell_dai_info(amount)])
 			.then(async function(data2){
-				var buy_dai_price = data2[0][0];
+				var buy_dai_price = Number(data2[0][0]);
 				var a_buy_dai_dex = data2[0][1];
-				var sell_dai_price = data2[1][0];
+				var sell_dai_price = Number(data2[1][0]);
 				var a_sell_dai_dex = data2[1][1];
-						console.log(1 / ((Number(data2[0][0]) + Number(data2[1][0])) * 0.5));
-				cpricep = buy_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
-				cpricem = sell_dai_price / ((buy_dai_price + sell_dai_price) * 0.5) * cprice;
+			   	var d_eth_dai_price = 1. / ((buy_dai_price + sell_dai_price) * 0.5);
+				cpricep = buy_dai_price * d_eth_dai_price * cprice;
+				cpricem = sell_dai_price * d_eth_dai_price * cprice;
 				compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
 				compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
 				buy_dai_dex.innerHTML = String(a_buy_dai_dex);
