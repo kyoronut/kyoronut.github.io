@@ -249,8 +249,9 @@ function get_sell_dai_info(val){
 				var a_buy_dai_dex = data2[0][1];
 				var sell_dai_price = data2[1][0];
 				var a_sell_dai_dex = data2[1][1];
-				cpricep = buy_dai_price * a_eth_dai_price * cprice;
-				cpricem = sell_dai_price * a_eth_dai_price * cprice;
+			        var d_eth_dai_price = 1. / ((buy_dai_price + sell_dai_price) * 0.5);
+				cpricep = buy_dai_price * d_eth_dai_price * cprice;//(dai/eth)(eth/dai)(dai/cdai)
+				cpricem = sell_dai_price * d_eth_dai_price * cprice;
 				compound_price_m.innerHTML = Number(cpricem).toFixed(pfix);
 				compound_price_p.innerHTML = Number(cpricep).toFixed(pfix);
 				buy_dai_dex.innerHTML = String(a_buy_dai_dex);
