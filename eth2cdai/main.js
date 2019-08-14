@@ -197,7 +197,7 @@ async function search_price(){
 
 		amount.innerHTML += "<h4>" + String(dai_am[i]) + "</h4>"
 			+ "<h5>" + String(Number(spread_p).toFixed(2))+"%</h5>"
-			+ "<h5><br></h5>"
+			+ "<h5>"+String(cdai_am[i].toExponential(3))+"</h5>"
 			+ "<h5><br></h5>";
 	}
 }
