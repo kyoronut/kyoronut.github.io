@@ -4,10 +4,12 @@
 - [Spotlight (Japanese blog)](https://spotlight.soy/1189)
 - [Hide (Japanese/English blog)](https://hide.ac/users/ytkUhyIcn7bZPntEyTU00OBx64d2)
 - [Medium(English blog)](https://medium.com/@kyoronut)
+
 # English articles
 - [Uniswap + Option](https://medium.com/@kyoronut/uniswap-option-c08681747ca2)
 - [[draft] "Impermanent loss" of FLI?](https://hide.ac/articles/M60HGAvUe)
 - [[draft] Impermanent loss mitigation with FLI](https://hide.ac/articles/ObmT7A2F_)
+
 # Japanese articles
 - [【Uniswap v3, Kyber dmm】増幅されても限定的な Impermanent loss](https://hide.ac/articles/eQpeeLqhx)
 - [Kyber dmmと Uniswap v3](https://hide.ac/articles/ft4Rd4P_T)
