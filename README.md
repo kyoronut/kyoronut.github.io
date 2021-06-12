@@ -12,6 +12,7 @@
 - [[draft] Impermanent loss mitigation with FLI](https://hide.ac/articles/ObmT7A2F_)
 
 # Japanese articles
+- [Curve v2: Dynamic fee](https://hide.ac/articles/BNGN9EcrW)
 - [【Uniswap v3, Kyber dmm】増幅されても限定的な Impermanent loss](https://hide.ac/articles/eQpeeLqhx)
 - [Kyber dmmと Uniswap v3](https://hide.ac/articles/ft4Rd4P_T)
 - [【Uniswap v3】集中流動性 (1)](https://alis.to/lisalisa/articles/375Pqo0rMVVe)
