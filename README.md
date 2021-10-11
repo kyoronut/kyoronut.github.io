@@ -1,8 +1,8 @@
 
 # kyoronut
 - [Twitter](https://twitter.com/kyoronut)
+- [週報 (Weekly twitter summary)](https://togetter.com/id/kyoronut)
 - [note (Japanese blog)](https://note.com/kyoronut)
-  - [週報 (Weekly twitter summary)](https://note.com/kyoronut/m/mb1440a312f97)
 - [Alis (Japanese blog)](https://alis.to/users/lisalisa)
 - [Spotlight (Japanese blog)](https://spotlight.soy/1189)
 - [Hide (Japanese/English blog)](https://hide.ac/users/ytkUhyIcn7bZPntEyTU00OBx64d2)
