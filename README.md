@@ -1,6 +1,7 @@
 
 # kyoronut
 - [Twitter](https://twitter.com/kyoronut)
+- [Dune Analytics](https://dune.xyz/kyoronut)
 - [週報 (Weekly twitter summary)](https://togetter.com/id/kyoronut)
 - [note (Japanese blog)](https://note.com/kyoronut)
 - [Alis (Japanese blog)](https://alis.to/users/lisalisa)
